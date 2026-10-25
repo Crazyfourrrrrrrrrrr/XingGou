@@ -7,6 +7,7 @@ from core.scene import ProjectStore
 from core.generator import Provider,generate_plan,generate_scene,generate_asset,offline_plan,offline_scene
 from core.gia import export_scene,ExportBlocked
 from core.branding import TOOL,DISPLAY_NAME,VERSION
+from core.workflow import guide as workflow_guide,review as workflow_review
 
 ROOT=Path(__file__).resolve().parent
 class App:
@@ -63,13 +64,18 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/api/project':return self.json(app.store.get())
         if path=='/api/catalog':return self.json(dict(assets=app.catalog.search(qs.get('q',[''])[0],qs.get('category',[''])[0],qs.get('ready',[''])[0]=='true',qs.get('limit',[60])[0])))
         if path=='/api/provider':return self.json(app.provider.status())
+        if path=='/api/workflow':return self.json(workflow_guide())
+        if path.startswith('/tutorial/'):
+            name=path[len('/tutorial/'):]
+            if name not in ('使用教程.md','AI地编协作规范.md','四合院示例.md','images/courtyard-plan.svg'):raise FileNotFoundError('教程文件不存在')
+            return self.file(ROOT/'docs'/name)
         if path.startswith('/models/') and re.fullmatch(r'/models/[\w-]+\.glb',path):return self.file(app.catalog.model_path(path[8:-4]))
         if path.startswith('/download/'):
             file=(app.exports/path[10:]).resolve()
             if not file.is_relative_to(app.exports.resolve()):raise PermissionError('路径无效')
             return self.file(file,True)
         if path.startswith('/api/'):raise FileNotFoundError('接口不存在')
-        file=(ROOT/'web'/('index.html' if path=='/' else path.lstrip('/'))).resolve()
+        file=(ROOT/'web'/('index.html' if path=='/' else 'guide.html' if path=='/guide' else path.lstrip('/'))).resolve()
         if not file.is_relative_to((ROOT/'web').resolve()):raise PermissionError('路径无效')
         self.file(file)
     def do_GET(self):self.guard(self.get)
@@ -88,8 +94,10 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/api/project':return self.json(app.store.put(data.get('project'),data.get('revision'),data.get('source','web')))
         if path=='/api/bindings':return self.json(app.catalog.bind(data.get('assetId'),data.get('templateId')))
         if path=='/api/provider':return self.json(app.provider.configure(data))
+        if path=='/api/workflow/guide':return self.json(workflow_guide(data.get('brief',{}),data.get('stage','brief')))
+        if path=='/api/workflow/review':return self.json(workflow_review(data.get('brief',{}),data.get('mode','offline'),app.provider))
         if path=='/api/export':return self.json(export_scene(data.get('project',app.store.get()['project']),app.catalog,app.exports))
-        if path=='/api/ai/plan':return self.json(dict(plan=generate_plan(data.get('idea',''),data.get('mode','offline'),app.provider)))
+        if path=='/api/ai/plan':return self.json(dict(plan=generate_plan(data.get('idea',''),data.get('mode','offline'),app.provider,data.get('brief'))))
         if path=='/api/ai/scene':return self.json(dict(project=generate_scene(data.get('plan'),data.get('mode','offline'),app.catalog,app.provider)))
         if path=='/api/ai/asset':return self.json(dict(asset=generate_asset(data.get('idea',''),data.get('mode','offline'),app.provider,app.catalog,data.get('allowPrimitives',False))))
         if path=='/api/shutdown':

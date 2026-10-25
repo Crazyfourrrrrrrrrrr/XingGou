@@ -4,13 +4,13 @@
 
 在本机浏览器里，用千星奇域的现有原生资产设计场景，把文字想法转成可编辑布局，再导出 GIA 或带材质的 GLB。
 
-**v0.3.0 · Windows x64 便携完整版 · 工具源码 GPL-3.0**
+**v0.4.0 · Windows x64 便携完整版 · 工具源码 GPL-3.0**
 
 原 StarScene Studio 现更名为 **XingGou / 星构工具箱**；继续兼容旧 `.starscene.json` 工程和 `STARSCENE_*` 环境变量。
 
 [![Tests](https://github.com/Crazyfourrrrrrrrrrr/XingGou/actions/workflows/tests.yml/badge.svg)](https://github.com/Crazyfourrrrrrrrrrr/XingGou/actions/workflows/tests.yml)
 
-[下载完整素材版](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.3.0/XingGou-0.3.0-full.zip) · [源码版](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.3.0/XingGou-0.3.0-source.zip) · [观看完整版实录 · 63 秒 1080p](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.3.0/XingGou-promo-1080p.mp4) · [报告问题](https://github.com/Crazyfourrrrrrrrrrr/XingGou/issues/new/choose)
+[下载完整素材版](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.4.0/XingGou-0.4.0-full.zip) · [源码版](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.4.0/XingGou-0.4.0-source.zip) · [观看完整版实录 · 63 秒 1080p](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.3.0/XingGou-promo-1080p.mp4) · [报告问题](https://github.com/Crazyfourrrrrrrrrrr/XingGou/issues/new/choose)
 
 - 搜索本地模型、拖放布景、变换编辑、多选组合、撤销重做和自动保存。
 - 优先复用完整原生模型与原材质；缺资源时列出缺项，不自动用白模拼搭替代。
@@ -20,7 +20,7 @@
 
 **首选下载完整素材版。** 包含 **2,996 个独立 GLB 模型、3,291 张实际内嵌图片**及目录索引，附官方 Python 3.15.1 Windows x64 运行时。Windows 64 位用户完整解压后双击启动即可，**无需预装 Python 或另配素材库**。单独源码版不附素材和运行时，供自行配置使用。工具代码按 GPL-3.0 发布；模型、贴图保留原有权利，Python 运行时采用 PSF 许可。
 
-[发布说明](docs/RELEASE-v0.3.0.md) · [验证记录](docs/VALIDATION.md) · [贡献指南](docs/CONTRIBUTING.md) · [第三方来源](THIRD_PARTY.md)
+[使用教程](docs/使用教程.md) · [AI 地编协作规范](docs/AI地编协作规范.md) · [四合院案例](docs/四合院示例.md) · [发布说明](docs/RELEASE-v0.4.0.md) · [验证记录](docs/VALIDATION.md) · [贡献指南](docs/CONTRIBUTING.md) · [第三方来源](THIRD_PARTY.md)
 
 [![观看 XingGou v0.3.0 完整版实录 · 63 秒 1080p](docs/images/editor-example.png)](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.3.0/XingGou-promo-1080p.mp4)
 
@@ -32,7 +32,7 @@
 
 ### Windows x64 完整素材版（推荐）
 
-1. 下载 `XingGou-0.3.0-full.zip`，完整解压。
+1. 下载 `XingGou-0.4.0-full.zip`，完整解压。
 2. 双击 **`启动星构.cmd`**。包内已含 Python 3.15.1 x64 和模型库，无需预装 Python、复制配置文件或另找素材。
 3. 关闭服务时双击 `停止星构.cmd`。
 
@@ -54,7 +54,7 @@ XingGou/
 
 ### 单独源码版
 
-下载 `XingGou-0.3.0-source.zip`。此包不附模型、贴图或 Python 运行时，需自行安装 **Python 3.10+**，将 `config.example.json` 复制为 `config.local.json`，按下文配置资产库，再启动：
+下载 `XingGou-0.4.0-source.zip`。此包不附模型、贴图或 Python 运行时，需自行安装 **Python 3.10+**，将 `config.example.json` 复制为 `config.local.json`，按下文配置资产库，再启动：
 
 ```sh
 python launch.py
@@ -116,6 +116,16 @@ MyAssetLibrary/
 
 ## 编辑与生成
 
+### 新手先走地编流程
+
+点击顶部 **“地编教程”**：填写已知需求 → 查看离线问题或让已配置的 AI 提问 → 确认需求卡 → 概念拆解 → 二维平面 → 主体搭建 → 地形 → 程序化规则 → 远中近造景 → 氛围 → 性能实机。
+
+每轮只问 2–3 个关键问题，覆盖类型、玩家视角、主题、交互目标、规模、参考与预算。需求齐全后，在“需求分析”阶段勾选完成，再点击“采用需求，送到设计助手”。网页 AI 生成草案前会先检查需求；生成三维布局前还需在教程中确认二维平面，并重新采用需求。已有离线快捷布局可直接试用。
+
+二维平面可以由外部 AI 提供，或自己绘制并在俯视下复核；当前内置向导不自动生成任意平面图。参考图交给支持视觉的外部 AI，网页内 AI 接口只接收需求文字。地形、游戏灯光、节点图与交互在千星原生编辑器落实。需求卡和进度保存在当前浏览器，采用需求只更新设计助手输入，不修改已有场景。
+
+完整步骤见[使用教程](docs/使用教程.md)，也可直接把[AI 地编协作规范](docs/AI地编协作规范.md)发给外部 AI；[四合院案例](docs/四合院示例.md)包含需求分析、二维平面和分阶段制作清单。
+
 1. 左侧搜索模型，双击添加或拖到画布定位。关闭“仅显示已绑定游戏编号”后可预览未绑定模型。
 2. W 移动、E 旋转、R 缩放、F 聚焦；右键旋转视角，中键平移，滚轮缩放。
 3. Shift 多选，Ctrl+D 复制，Delete 删除，Ctrl+Z 撤销，Ctrl+Shift+Z 重做。
@@ -173,11 +183,13 @@ AI 请求发送文字、草案及相关资产名称、编号和尺寸，不发�
 
 0.3.0 增加完整模型库与官方 Python Windows x64 运行时，并自动检测包内 `library/`。便携运行时已实际通过 CMD 启动、服务健康检查及静态 GIA 导出。已有原生资产优先、默认静态导出行为保持不变。
 
+0.4.0 增加地编教程、需求卡、AI 澄清问题、阶段确认、四合院平面案例及 MCP `level_design_guide`。AI 分析是文字需求的只读辅助；新增引导不代表已实现原生地形、灯光或交互自动化。
+
 ## MCP 与开发
 
 启动编辑器后，可在支持 stdio MCP 的客户端中配置 `mcp_server.py`。参考 [MCP 配置示例](examples/mcp-config.example.json)填写本机 Python 命令及脚本路径。示例服务名为 `xinggou`；可用 `XINGGOU_URL` 指定已启动服务地址（兼容 `STARSCENE_URL`）。
 
-提供 `catalog_search`、`scene_get`、`scene_replace`、`scene_export`、`asset_recipes`。提交工程时必须携带读取到的 `revision`，防止覆盖网页修改；默认策略同样是原生资产优先、固定布景静态导出。
+提供 `level_design_guide`（新关卡先澄清需求与确认平面）、`catalog_search`、`scene_get`、`scene_replace`、`scene_export`、`asset_recipes`。提交工程时必须携带读取到的 `revision`，防止覆盖网页修改；默认策略同样是原生资产优先、固定布景静态导出。
 
 开发测试使用统一命令：
 

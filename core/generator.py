@@ -304,10 +304,18 @@ def context(catalog,idea):
             add_asset(catalog.by_id[a['id']])
     return assets
 
-def generate_plan(idea,mode,provider):
+def generate_plan(idea,mode,provider,brief=None):
     if mode=='offline':return offline_plan(idea)
     if mode!='ai':raise ValueError('生成模式无效')
-    p=bounded_plan(provider.ask(PLAN_SYSTEM,{'idea':str(idea)[:6000]}));p.update(mode='ai',prompt=str(idea)[:6000]);return p
+    data={'idea':str(idea)[:6000]}
+    if brief is not None:
+        from .workflow import guide
+        workflow=guide(brief)
+        if not workflow['readyForConcept']:raise ValueError('请先补齐并确认需求卡，再生成 AI 草案')
+        data['confirmedBrief']=workflow['brief']
+    p=bounded_plan(provider.ask(PLAN_SYSTEM,data));p.update(mode='ai',prompt=str(idea)[:6000])
+    if brief is not None:p['workflowBrief']=workflow['brief']
+    return p
 
 def generate_scene(plan,mode,catalog,provider):
     p=bounded_plan(plan)

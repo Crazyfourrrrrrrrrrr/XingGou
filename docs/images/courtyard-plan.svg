@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="790" viewBox="0 0 960 790">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#b26e37"/></marker></defs>
+<rect width="960" height="790" fill="#f5f6ef"/>
+<g font-family="Microsoft YaHei, sans-serif" fill="#243e33"><text x="45" y="46" font-size="25" font-weight="bold">四合院 · 二维占地与动线示例</text><text x="45" y="78" font-size="15">先确认结构与通行，再选择真实原生资产。矩形只代表规划占地。</text>
+<rect x="194" y="130" width="448" height="560" rx="4" fill="#e9e7d9" stroke="#536d5d" stroke-width="4"/>
+<path d="M194 110H642M174 130V690" stroke="#829583"/><text x="385" y="104" font-size="16">32 米</text><text x="115" y="413" font-size="16">40 米</text>
+<path d="M418 150V670" stroke="#b7c2ac" stroke-dasharray="5 7"/>
+<g fill="#a5b8a1" stroke="#536d5d" stroke-width="2"><rect x="334" y="172" width="168" height="84"/><rect x="222" y="326" width="84" height="168"/><rect x="530" y="326" width="84" height="168"/><rect x="446" y="620" width="112" height="56"/></g>
+<g font-size="17" text-anchor="middle"><text x="418" y="208">正房区</text><text x="418" y="235" font-size="14">12 × 6 m</text><text x="264" y="405">西厢房区</text><text x="264" y="435" font-size="14">6 × 12 m</text><text x="572" y="405">东厢房区</text><text x="572" y="435" font-size="14">6 × 12 m</text><text x="502" y="654">入口区</text></g>
+<rect x="467" y="557" width="70" height="14" fill="#697e6a"/><text x="550" y="570" font-size="16">影壁</text>
+<rect x="376" y="282" width="84" height="240" rx="12" fill="#f9faf2" stroke="#bbc4ae" stroke-dasharray="5 5"/>
+<text x="418" y="382" text-anchor="middle" font-size="18">院心留白</text><text x="418" y="413" text-anchor="middle" font-size="14">通行与停留</text>
+<path d="M502 708V681M502 616L451 590L418 524V270" fill="none" stroke="#b26e37" stroke-width="5" marker-end="url(#arrow)"/>
+<circle cx="350" cy="485" r="22" fill="#8eaf81" stroke="#57764c"/><text x="323" y="527" font-size="14">可选主树</text>
+<text x="700" y="165" font-size="19" font-weight="bold">设计检查</text><g font-size="16"><text x="700" y="205">01 入口绕影壁不堵塞</text><text x="700" y="242">02 主路与院心保持留白</text><text x="700" y="279">03 正房与两翼建立围合</text><text x="700" y="316">04 先测一栋的朝向/碰撞</text><text x="700" y="353">05 相机转角留出空间</text><text x="700" y="390">06 细节按玩家镜头添加</text></g>
+<text x="700" y="478" font-size="17" font-weight="bold">方向与尺寸</text><g font-size="14"><text x="700" y="511">水平平面：X/Z；Y 为高度。</text><text x="700" y="539">图上方仅为示意北侧。</text><text x="700" y="567">不据此推断游戏模型朝向。</text><text x="700" y="595">尺寸是初始建议，需实机复核。</text></g>
+<text x="45" y="756" font-size="14">XingGou · 规划符号不作为白模建筑导出；完整原生模型、地形、游戏灯光与交互分别落实。</text></g></svg>

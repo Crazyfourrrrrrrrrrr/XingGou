@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>星构 · 地编教程与 AI 协作</title><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/guide.css"></head>
+<body><header><a class="brand" href="/">✦ 星构工具箱</a><a href="/">返回场景编辑器 ↗</a></header>
+<main><section class="hero"><div><p class="eyebrow">FROM IDEA TO PLAYABLE SPACE</p><h1>先想清楚，再搭起来。</h1><p>用地编流程把一句想法，变成能规划、能搭建、能验收的关卡。先确认需求和二维平面，再制作主体与细节。</p></div><span class="tag">新手教程 / AI 协作</span></section>
+<nav class="quick"><a href="#brief">01 需求卡</a><a href="#workflow">02 制作阶段</a><a href="#courtyard">03 四合院示例</a><a href="#manual">04 完整教程</a></nav>
+<div id="status" role="status">正在读取教程…</div>
+<section id="brief" class="card"><p class="eyebrow">ASK BEFORE BUILDING</p><h2>把需求告诉 AI</h2><p>不用一次回答所有问题。先填写已知信息，再让 AI 每轮问 2–3 个关键问题；不知道的写“待定”，让 AI 提方案供你选择。</p><form id="brief-form"><div id="fields" class="fields"></div></form>
+<p class="note">参考图：请发给支持看图的外部 AI，并把它的构图与风格分析填入“参考图或描述”。本页只处理文字。</p>
+<div class="actions"><button id="review-offline">查看下一轮问题</button><button id="review-ai" class="primary">让 AI 分析需求</button><button id="load-example">填入四合院需求示例</button><button id="use-brief">采用需求，送到设计助手</button></div>
+<p id="provider-note" class="note">离线问题清单无需密钥。AI 分析只在点击按钮后发送需求文字，沿用编辑器里的模型设置。</p><div id="review" aria-live="polite"></div></section>
+<section id="workflow" class="card"><p class="eyebrow">ONE STAGE AT A TIME</p><h2>当前先做哪一步？</h2><p>需求与平面是关键确认点；之后边搭建边复核。这里记录制作进度并生成本阶段指令，场景操作在编辑器或外部 MCP 客户端中完成。</p><div class="workflow-layout"><ol id="stages"></ol><div><article id="stage-detail"></article><label class="confirm"><input id="confirm-stage" type="checkbox">我已完成并检查这一阶段</label><div class="actions"><button id="next-stage">进入下一阶段</button><button id="copy-task" class="primary">复制本阶段 AI 指令</button><button id="download-brief">下载需求卡与进度</button></div><p class="note">需求有实质变化时，回到需求分析，重新确认受影响的平面与主体方案。复制的完整指令会要求 AI 沿用已知信息，并先询问关键缺项。</p></div></div></section>
+<section id="courtyard" class="card"><p class="eyebrow">CASE STUDY</p><h2>“我要做一个四合院”，然后呢？</h2><p>先确认是展示还是解谜、玩家镜头、规模与参考，再拆成围合、轴线、正房、两翼、入院转折和院心留白。先验证空间关系，再选真实资产。</p><img class="plan" src="/tutorial/images/courtyard-plan.svg" alt="32乘40米的四合院二维占地与游览动线示例"><p class="note">规划符号不是最终模型；尺寸只是起点，门洞、朝向、相机和碰撞需在千星实机复核。内置离线村庄规则不会自动生成这张院落平面。</p><a href="/tutorial/四合院示例.md" target="_blank" rel="noreferrer">查看完整四合院案例 ↗</a></section>
+<section id="manual" class="card"><p class="eyebrow">READ / COPY / SHARE</p><h2>完整教程与 AI 协作规范</h2><div class="actions"><button id="show-manual">阅读全文教程</button><button id="copy-rules">复制通用 AI 协作规范</button><a href="/tutorial/使用教程.md" target="_blank" rel="noreferrer">教程文件 ↗</a><a href="/tutorial/AI地编协作规范.md" target="_blank" rel="noreferrer">AI 规范文件 ↗</a></div><article id="manual-content" hidden></article></section>
+<footer>原生完整资产优先 · 固定布景静态导出 · 地形、游戏灯光、交互和官方负载在千星内落实与验证</footer></main><script type="module" src="/guide.js"></script></body></html>

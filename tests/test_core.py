@@ -196,6 +196,16 @@ class HttpTests(unittest.TestCase):
                 env=os.environ.copy();env.pop('XINGGOU_URL',None);env['STARSCENE_URL']=self.url
                 if preferred:env.update(XINGGOU_URL=self.url,STARSCENE_URL='http://127.0.0.1:1')
                 result=subprocess.run([sys.executable,str(ROOT/'mcp_server.py')],input='\n'.join(json.dumps(x,ensure_ascii=False) for x in messages)+'\n',text=True,encoding='utf-8',capture_output=True,env=env,timeout=20,creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)
-                self.assertEqual(result.returncode,0,result.stderr);rows=[json.loads(x) for x in result.stdout.splitlines()];self.assertEqual(len(rows),4);self.assertEqual(rows[0]['result']['serverInfo']['name'],'XingGou');self.assertEqual(len(rows[1]['result']['tools']),5);self.assertFalse(rows[2]['result'].get('isError'));self.assertIn('revision',json.loads(rows[3]['result']['content'][0]['text']))
+                self.assertEqual(result.returncode,0,result.stderr);rows=[json.loads(x) for x in result.stdout.splitlines()];self.assertEqual(len(rows),4);self.assertEqual(rows[0]['result']['serverInfo']['name'],'XingGou');self.assertIn('level_design_guide',{t['name'] for t in rows[1]['result']['tools']});self.assertIn('二维平面',rows[0]['result']['instructions']);self.assertFalse(rows[2]['result'].get('isError'));self.assertIn('revision',json.loads(rows[3]['result']['content'][0]['text']))
+    def test_workflow_http_is_read_only_and_tutorial_files_are_confined(self):
+        before=self.server.app.store.get()
+        with self.request('/api/workflow') as response:self.assertEqual(len(json.load(response)['stages']),9)
+        with self.request('/api/workflow/review',dict(brief={'idea':'四合院'},mode='offline')) as response:
+            result=json.load(response);self.assertFalse(result['readyForConcept']);self.assertLessEqual(len(result['questions']),3)
+        self.assertEqual(self.server.app.store.get(),before)
+        with self.request('/guide') as response:self.assertIn(b'brief-form',response.read())
+        with self.request('/tutorial/'+urllib.parse.quote('使用教程.md')) as response:self.assertIn('二维平面',response.read().decode())
+        with self.assertRaises(urllib.error.HTTPError) as caught:self.request('/tutorial/../server.py')
+        self.assertEqual(caught.exception.code,404)
 
 if __name__=='__main__':unittest.main(verbosity=2)
