@@ -1,0 +1,4 @@
+# Preserve release checksums and the original bytes of vendored sources/templates.
+* -text
+*.png binary
+*.gia binary

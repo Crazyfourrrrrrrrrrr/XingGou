@@ -1,0 +1,41 @@
+{
+  "schema": "starscene/1",
+  "name": "原生水体 单独验证",
+  "nodes": [
+    {
+      "id": "n_8c47aa19932a",
+      "assetId": "10005106",
+      "name": "原生水体",
+      "position": [
+        0.0,
+        0.02,
+        0.0
+      ],
+      "scale": [
+        8.0,
+        0.08,
+        6.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": true,
+      "locked": false,
+      "layer": "原生水体"
+    }
+  ],
+  "definitions": {},
+  "settings": {
+    "snap": 1,
+    "rotateSnap": 15,
+    "groundHeight": 0
+  },
+  "design": {
+    "assetPolicy": "native-only",
+    "notes": [
+      "真实原生水体编号；网页材质近似，游戏水材质和行为待验证。"
+    ]
+  }
+}

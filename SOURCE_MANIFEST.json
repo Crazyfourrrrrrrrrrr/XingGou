@@ -1,0 +1,302 @@
+[
+  {
+    "path": ".gitattributes",
+    "bytes": 117,
+    "sha256": "a718cbc170cd889cb1ea89c754c2f14ebec535b9c6b23b7ca52ac69e8b5660ae"
+  },
+  {
+    "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
+    "bytes": 1397,
+    "sha256": "601011e5f54334227b63a398dacfd39466cb0a1fbabf100ed0c6c81b220dfe36"
+  },
+  {
+    "path": ".github/ISSUE_TEMPLATE/feature_request.yml",
+    "bytes": 713,
+    "sha256": "49ed20eec427e59b1363ebc6aea33b340a5244580f212b49a9cf7615bdb37678"
+  },
+  {
+    "path": ".github/workflows/tests.yml",
+    "bytes": 1164,
+    "sha256": "636d01121be643421efbba3d1678da6811688ebb167ae791a527926b414568cd"
+  },
+  {
+    "path": ".gitignore",
+    "bytes": 210,
+    "sha256": "4b507e040b89d8a4f362cdb7b1596fee854b21241ced43539085a4225cd4ed5a"
+  },
+  {
+    "path": "config.example.json",
+    "bytes": 48,
+    "sha256": "74679c37061ce78624931c0d90ad658a71b544a2aae10a934f058e1620ed51b4"
+  },
+  {
+    "path": "core/__init__.py",
+    "bytes": 40,
+    "sha256": "775893f44c096ab764eac7e5dfea7b56a2c7a18cb2ae12a2525affb276f6b126"
+  },
+  {
+    "path": "core/catalog.py",
+    "bytes": 6330,
+    "sha256": "751a7a0b8fde7326b07d7370a926947923be81e0e36fd5df35a7cc9e415f4579"
+  },
+  {
+    "path": "core/coordinates.py",
+    "bytes": 1025,
+    "sha256": "1036ddffba21422a6b384da5ccc6d9ac04a1d1424026772cafddb875dddba9bd"
+  },
+  {
+    "path": "core/generator.py",
+    "bytes": 27077,
+    "sha256": "6c6baea779b9e66526e89eeeb615f75043ead78456c17d5062f61c8dc10473b6"
+  },
+  {
+    "path": "core/gia.py",
+    "bytes": 13237,
+    "sha256": "ed2d53deb157dc9f98bcd49501a447ed1acf5effc4d763dbceb14869daaf8008"
+  },
+  {
+    "path": "core/math3d.py",
+    "bytes": 1581,
+    "sha256": "7fdd25c7e53a1cde9e7f3fc903a6a8436d8d29b0ec195cf9662945f0a7de83c0"
+  },
+  {
+    "path": "core/naming.py",
+    "bytes": 1000,
+    "sha256": "eb0e05c648e8e283afcab1d186bda1881ea189f283a1b2b124b8e0303c0498cc"
+  },
+  {
+    "path": "core/scene.py",
+    "bytes": 6252,
+    "sha256": "3b5402417c166f6a3f6504415f694a3c141388af2362d6c6accef0cd26178ef6"
+  },
+  {
+    "path": "core/static_gia.py",
+    "bytes": 19922,
+    "sha256": "5d252ae380e61134c55eb3763c410cd325ded50ff20890c2cefa2e56e79ba62f"
+  },
+  {
+    "path": "docs/CONTRIBUTING.md",
+    "bytes": 2768,
+    "sha256": "eb3f16e898593103cffb886796c9cf57760140cef3a795619c12e1cc9b3f8425"
+  },
+  {
+    "path": "docs/images/banner.svg",
+    "bytes": 2002,
+    "sha256": "fe2ba3ebcfb7316ae9d5075c9c8ad3d5afaa886b8ac5ec6ad48a55193ed94427"
+  },
+  {
+    "path": "docs/images/editor-example.png",
+    "bytes": 604756,
+    "sha256": "b26592312068746d45297bf9b892114fe461b8e724bd81390301ab8fce8b0c5f"
+  },
+  {
+    "path": "docs/RELEASE-v0.1.3.md",
+    "bytes": 3330,
+    "sha256": "dba56a7f714865818929e78635d088553dc710fdef40a607b0f1a8c0af7c65d6"
+  },
+  {
+    "path": "docs/VALIDATION.md",
+    "bytes": 10606,
+    "sha256": "e109b9a04d5abc017cba8a472f66cb9663800dae45146f59350da3817ef06cba"
+  },
+  {
+    "path": "examples/mcp-config.example.json",
+    "bytes": 137,
+    "sha256": "0789822ff60ff73a7dece51d052d43d9bdb9c449850aeb662b205b2d777d381d"
+  },
+  {
+    "path": "examples/原生水体验证.starscene.json",
+    "bytes": 773,
+    "sha256": "d6fc7192622e8098b2413570d56f25683ad51d0378907fef087ab62a84a3df7b"
+  },
+  {
+    "path": "examples/坐标校准.starscene.json",
+    "bytes": 2797,
+    "sha256": "56303893ebb71b44214d265d0a46ee9d364a62f9b080114318f392750737c4f7"
+  },
+  {
+    "path": "examples/溪畔小聚.starscene.json",
+    "bytes": 23293,
+    "sha256": "ecf5d825c48103e8e9ce3dc0971ea8132211bd336963472e3107abada29abb91"
+  },
+  {
+    "path": "launch.py",
+    "bytes": 2270,
+    "sha256": "d76688faa490d819dd2eaefafd2c7d39b0462cd65a1b3e2412db39ce9830a306"
+  },
+  {
+    "path": "LICENSE",
+    "bytes": 35823,
+    "sha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809"
+  },
+  {
+    "path": "licenses/three-LICENSE",
+    "bytes": 1081,
+    "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
+  },
+  {
+    "path": "mcp_server.py",
+    "bytes": 6054,
+    "sha256": "c9493a741a940d5f530cff8dd3742024c35eb301fbe8a246bb504e0cfab9c0c5"
+  },
+  {
+    "path": "package_source.py",
+    "bytes": 2738,
+    "sha256": "f60697e63c142cb08eb9032a83c16f80fa441398162b28f3a28213e310aa61dd"
+  },
+  {
+    "path": "README.md",
+    "bytes": 10930,
+    "sha256": "c47fdf9860591f8153837ccef7e5dcdf1830f3a863831cf4a8fc3bbd45795b71"
+  },
+  {
+    "path": "server.py",
+    "bytes": 8677,
+    "sha256": "c821cb2e00383f384ed57a6977a864c9d295cbbecc8d4d3c3a16d1a9ffb4a2c4"
+  },
+  {
+    "path": "tests/blender_verify.py",
+    "bytes": 1367,
+    "sha256": "016f23b6fde1a462ad56dca8f6856c979b6b5cb7e8ca2e8f67d954ccbdd04ddf"
+  },
+  {
+    "path": "tests/browser-smoke.cjs",
+    "bytes": 10425,
+    "sha256": "c389de24aa14df81a7f81386b6f6633769ca4c54da8f0ccb0162ac9df9db3d3c"
+  },
+  {
+    "path": "tests/package-preview.cjs",
+    "bytes": 1359,
+    "sha256": "a0a1040e30b4475984a4d1a82c6c8912722e46422d948021fe2eadd57dd95bb7"
+  },
+  {
+    "path": "tests/test_core.py",
+    "bytes": 14490,
+    "sha256": "97fdc0b57ba00a816762b5a575fc7f65d00b01b5e719291b60001728c66084d7"
+  },
+  {
+    "path": "tests/test_native_policy.py",
+    "bytes": 14748,
+    "sha256": "a90cbc60498fec530c7f0e046f1918731a4c1e63df46bf625d4d966a156cdf96"
+  },
+  {
+    "path": "tests/test_static_export.py",
+    "bytes": 12424,
+    "sha256": "c5a50efa4291c93dbda132c760177f93b27ac2c408dd5b82a7aec53ee1f0e612"
+  },
+  {
+    "path": "THIRD_PARTY.md",
+    "bytes": 3871,
+    "sha256": "17dc1d27c19033b1130efd05a629c2a7e121adff983f9cd1cd1a39f996143463"
+  },
+  {
+    "path": "vendor/miliastra_tools/miliastra_core/__init__.py",
+    "bytes": 40,
+    "sha256": "775893f44c096ab764eac7e5dfea7b56a2c7a18cb2ae12a2525affb276f6b126"
+  },
+  {
+    "path": "vendor/miliastra_tools/miliastra_core/export/__init__.py",
+    "bytes": 40,
+    "sha256": "775893f44c096ab764eac7e5dfea7b56a2c7a18cb2ae12a2525affb276f6b126"
+  },
+  {
+    "path": "vendor/miliastra_tools/miliastra_core/export/decoration.py",
+    "bytes": 43058,
+    "sha256": "6aa18695f97ba32a9cabb23a154b2fbc251b24cd98572697e439bb9a26c96a54"
+  },
+  {
+    "path": "vendor/miliastra_tools/miliastra_core/protobuf/__init__.py",
+    "bytes": 40,
+    "sha256": "775893f44c096ab764eac7e5dfea7b56a2c7a18cb2ae12a2525affb276f6b126"
+  },
+  {
+    "path": "vendor/miliastra_tools/miliastra_core/protobuf/wire.py",
+    "bytes": 6934,
+    "sha256": "831f2d4924281d2185bdf45738c4d8c9b946f3bc4fcc822261c16aa76f0b9e97"
+  },
+  {
+    "path": "vendor/miliastra_tools/Template/GPT2Gia_decorations.gia",
+    "bytes": 1079,
+    "sha256": "9a2516ec1de7135c147dd44a339c405f665148315863e2ae10d7f65d0d583b42"
+  },
+  {
+    "path": "vendor/miliastra_tools/Template/GPT2Gia_entities.gia",
+    "bytes": 10836,
+    "sha256": "0f16b5f34764888810ea002b5eaf4efa3be4f446308a7d6ff39e5bb4fcc6baa1"
+  },
+  {
+    "path": "web/app.js",
+    "bytes": 50320,
+    "sha256": "af21c60b1059b93176d10287409771c282d5a0c29b95f4b29a1c7cc3d53b9595"
+  },
+  {
+    "path": "web/favicon.svg",
+    "bytes": 189,
+    "sha256": "52f3ef0836f291d98d082993659b863ff76d626d8dc2b7f508f8d057896b8b20"
+  },
+  {
+    "path": "web/index.html",
+    "bytes": 12697,
+    "sha256": "00f9ae64043a76e14f279e275c98f06b205b15327cdac820301923f2a7072789"
+  },
+  {
+    "path": "web/style.css",
+    "bytes": 21183,
+    "sha256": "15c5c4aa4722e2d33f3df9f197108258e89de7ca19e4b09701d5d0f53f04795a"
+  },
+  {
+    "path": "web/vendor/three/build/three.core.js",
+    "bytes": 1403455,
+    "sha256": "eb077d2417f61d3e6d9264c317cabc4ea35769ed6b0ab533067292a550784c20"
+  },
+  {
+    "path": "web/vendor/three/build/three.module.js",
+    "bytes": 603113,
+    "sha256": "c8211c69345d2e9949dc7a8ac969380497aa0600a5a8ac6a459c8cd02dd9cb8a"
+  },
+  {
+    "path": "web/vendor/three/examples/jsm/controls/OrbitControls.js",
+    "bytes": 38703,
+    "sha256": "b97879c748170baadeb3fb84cea1ffdf4674e283dc06042f34e2acb95a76042c"
+  },
+  {
+    "path": "web/vendor/three/examples/jsm/controls/TransformControls.js",
+    "bytes": 49397,
+    "sha256": "621fb8894c0f748c2be2a6ff8a6bdd72c18a22b24ddfe21d506514544df5c84e"
+  },
+  {
+    "path": "web/vendor/three/examples/jsm/exporters/GLTFExporter.js",
+    "bytes": 86392,
+    "sha256": "e7c29444454eb321b39e4c8b3062944f4fd5299a0e7483e9cb8c0594cdec829f"
+  },
+  {
+    "path": "web/vendor/three/examples/jsm/loaders/GLTFLoader.js",
+    "bytes": 114739,
+    "sha256": "67ac5551fdafa6e349bd80c8f8e5e39c136d6b2fb1ad647db9abb21dc86f9e4a"
+  },
+  {
+    "path": "web/vendor/three/examples/jsm/utils/BufferGeometryUtils.js",
+    "bytes": 35539,
+    "sha256": "fda7e946b8e0b5ab39b779206589e7a1079a22eb24efb89d7223e03fdfb1f751"
+  },
+  {
+    "path": "web/vendor/three/examples/jsm/utils/SkeletonUtils.js",
+    "bytes": 11062,
+    "sha256": "0761b1e003917b215d25dd81439d854b36034b5a57ce84c2cfe3b02428d7b253"
+  },
+  {
+    "path": "web/vendor/three/FILES.json",
+    "bytes": 456,
+    "sha256": "17c9208a8a6692f2e16cd408195383e7c2069d624ae698ebaa13e289847334f7"
+  },
+  {
+    "path": "停止星构.cmd",
+    "bytes": 62,
+    "sha256": "106ee6367c68796d079115e814e56ace2b094f97dead5e5f68584dd3c8a4f9cb"
+  },
+  {
+    "path": "启动星构.cmd",
+    "bytes": 529,
+    "sha256": "82cc3a0985654b9cfc2efe5138ee1a3e6b347fa363e105533798be6910fd0497"
+  }
+]

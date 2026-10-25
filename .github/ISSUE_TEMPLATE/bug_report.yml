@@ -1,0 +1,43 @@
+name: 问题反馈
+description: 报告编辑、生成或导入导出异常。
+title: '[问题] '
+body:
+  - type: markdown
+    attributes:
+      value: 请不要上传游戏模型、贴图、API 密钥或含个人信息的完整配置。日志和截图请先脱敏。
+  - type: input
+    id: version
+    attributes:
+      label: 星构版本
+      placeholder: 例如 0.1.3，或提交编号
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 运行环境
+      description: 操作系统、Python 版本、浏览器；导入问题请补充游戏版本及是否配置外部资产库。
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤
+      description: 从打开工程开始，说明具体操作；可附不含模型和密钥的最小工程 JSON。
+      placeholder: |
+        1. 打开……
+        2. 点击……
+        3. 出现……
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: 预期结果与实际结果
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 日志、导出报告或截图
+      description: 如涉及负载，说明静态/旧动态格式、场景对象数量及是否保留其他版本；有同一测试区的对照数值请一并提供。

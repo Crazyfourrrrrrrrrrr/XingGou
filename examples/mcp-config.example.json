@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "starscene": {
+      "command": "python",
+      "args": ["C:/path/to/StarSceneStudio/mcp_server.py"]
+    }
+  }
+}

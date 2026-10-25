@@ -1,0 +1,38 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unit-tests:
+    name: ${{ matrix.os }} / Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.10', '3.12']
+    env:
+      PYTHONUTF8: '1'
+      # Public CI has no game assets, personal configuration or API credentials.
+      STARSCENE_ASSET_ROOT: ${{ runner.temp }}/starscene-empty-library
+      STARSCENE_AI_KEY: ''
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Check Python syntax
+        run: python -m compileall -q core tests server.py launch.py mcp_server.py
+
+      # Pure scene/export checks and loopback-only API mocks always execute.
+      # Real-library integrations explicitly skip without an external inventory;
+      # browser, Blender and native-game validation remain separate local checks.
+      - name: Run tests (real-library integrations skip in public CI)
+        run: python -m unittest discover -s tests -v

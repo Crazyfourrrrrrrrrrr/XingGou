@@ -1,0 +1,14 @@
+{
+  "version": "0.180.0",
+  "source": "https://registry.npmjs.org/three/-/three-0.180.0.tgz",
+  "files": [
+    "build/three.core.js",
+    "build/three.module.js",
+    "examples/jsm/controls/OrbitControls.js",
+    "examples/jsm/controls/TransformControls.js",
+    "examples/jsm/exporters/GLTFExporter.js",
+    "examples/jsm/loaders/GLTFLoader.js",
+    "examples/jsm/utils/BufferGeometryUtils.js",
+    "examples/jsm/utils/SkeletonUtils.js"
+  ]
+}

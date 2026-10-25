@@ -1,0 +1,157 @@
+{
+  "schema": "starscene/1",
+  "name": "StarScene 坐标校准",
+  "nodes": [
+    {
+      "id": "n_35b297a934a9",
+      "assetId": "10009001",
+      "name": "基座",
+      "position": [
+        0.0,
+        0.35,
+        0.0
+      ],
+      "scale": [
+        14.0,
+        0.5,
+        14.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": true,
+      "locked": false,
+      "layer": "场景",
+      "color": "#8b9388"
+    },
+    {
+      "id": "n_32fc03989ce5",
+      "assetId": "10009001",
+      "name": "原点单位立方体",
+      "position": [
+        0.0,
+        1.1,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": true,
+      "locked": false,
+      "layer": "场景",
+      "color": "#f3efe2"
+    },
+    {
+      "id": "n_342da4500699",
+      "assetId": "10009001",
+      "name": "X 正方向 红",
+      "position": [
+        5.0,
+        0.6799999999999999,
+        0.0
+      ],
+      "scale": [
+        10.0,
+        0.16,
+        0.16
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": true,
+      "locked": false,
+      "layer": "场景",
+      "color": "#c85f4d"
+    },
+    {
+      "id": "n_f00c8889062a",
+      "assetId": "10009001",
+      "name": "Y 正方向 绿",
+      "position": [
+        0.0,
+        3.1,
+        0.0
+      ],
+      "scale": [
+        0.16,
+        5.0,
+        0.16
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": true,
+      "locked": false,
+      "layer": "场景",
+      "color": "#4d9a66"
+    },
+    {
+      "id": "n_ad5db9fc676e",
+      "assetId": "10009001",
+      "name": "Z 正方向 蓝",
+      "position": [
+        0.0,
+        0.6799999999999999,
+        5.0
+      ],
+      "scale": [
+        0.16,
+        0.16,
+        10.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": true,
+      "locked": false,
+      "layer": "场景",
+      "color": "#4d7fb5"
+    },
+    {
+      "id": "n_a10598efbac0",
+      "assetId": "10009001",
+      "name": "旋转尺寸校验",
+      "position": [
+        3.0,
+        2.6,
+        3.0
+      ],
+      "scale": [
+        2.0,
+        3.0,
+        1.0
+      ],
+      "rotation": [
+        15.0,
+        30.0,
+        45.0
+      ],
+      "visible": true,
+      "locked": false,
+      "layer": "场景",
+      "color": "#d9ad57"
+    }
+  ],
+  "definitions": {},
+  "settings": {
+    "snap": 1,
+    "rotateSnap": 15,
+    "groundHeight": 0.6
+  },
+  "design": null
+}

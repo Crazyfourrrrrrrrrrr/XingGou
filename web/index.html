@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#173e38"><title>星构 StarScene · 千星场景工作室</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/style.css">
+  <script type="importmap">{"imports":{"three":"/vendor/three/build/three.module.js","three/addons/":"/vendor/three/examples/jsm/"}}</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/" aria-label="星构首页"><span class="brandmark">✦</span><span>星构 <small>STARSCENE</small></span><span class="version">0.1.3</span></a>
+  <div class="project-title"><span class="dot" id="save-dot"></span><input id="project-name" aria-label="工程名称" value="载入场景…"><span class="save-state" id="save-state">正在连接</span></div>
+  <nav><button id="new-project" title="新建空场景" data-icon="plus">新建</button><button id="open-project" data-icon="folder">打开</button><button id="save-project" data-icon="save">保存工程</button><span class="divider"></span><button id="settings" class="icon-btn" title="模型接口与设置" aria-label="模型接口与设置" data-icon="settings"></button><button id="export" class="primary" data-icon="download">导出 GIA</button></nav>
+</header>
+<main class="workspace">
+  <aside class="library panel">
+    <div class="panel-heading"><div><h1>资产库</h1><p id="library-count">连接本机模型库</p></div><span class="local-pill"><i></i> 本机</span></div>
+    <div class="library-tabs"><button class="active" data-library="native">原生资产</button><button data-library="custom">我的组合 <span id="custom-count">0</span></button></div>
+    <label class="search"><span data-icon="search"></span><input id="asset-search" placeholder="名称、编号或内部名称" autocomplete="off" aria-label="搜索资产"><kbd>/</kbd></label>
+    <div class="category-row" id="categories"><button class="active" data-category="精选">精选</button><button data-category="建筑">建筑</button><button data-category="植被">植被</button><button data-category="岩石">岩石</button><button data-category="地块">地块</button><button data-category="基元">基元</button><button data-category="全部">全部</button></div>
+    <label class="ready-filter"><input id="ready-only" type="checkbox" checked><span>仅显示已绑定游戏编号</span><span id="result-count"></span></label>
+    <div id="asset-list" class="asset-grid" aria-label="可用模型"></div>
+    <button id="load-more" class="load-more">显示更多资产</button>
+    <div class="library-foot"><span data-icon="mouse"></span> 双击添加 · 拖入画布定位</div>
+  </aside>
+  <section class="viewport-wrap" aria-label="三维场景编辑区">
+    <div class="viewport-top"><span class="scene-label"><i></i> 透视视图 <small>Y ↑</small></span><div class="viewport-actions"><button id="undo" class="icon-btn" title="撤销 Ctrl+Z" aria-label="撤销" data-icon="undo"></button><button id="redo" class="icon-btn" title="重做 Ctrl+Shift+Z" aria-label="重做" data-icon="redo"></button><span class="divider"></span><button id="view-iso" title="透视总览" data-icon="cube">总览</button><button id="view-top" title="俯视" data-icon="layers">俯视</button><button id="grid-toggle" class="icon-btn active" title="显示网格" aria-label="显示网格" data-icon="grid"></button></div></div>
+    <div id="viewport"><div class="loading-overlay" id="loading-overlay"><div class="loader"></div><b>正在打开本机工作室</b><span>读取模型目录与上次工程</span></div></div>
+    <div class="transform-toolbar"><button class="active" data-mode="translate" title="移动 W" data-icon="move"><kbd>W</kbd></button><button data-mode="rotate" title="旋转 E" data-icon="rotate"><kbd>E</kbd></button><button data-mode="scale" title="缩放 R" data-icon="scale"><kbd>R</kbd></button><span class="divider"></span><button id="snap-toggle" class="active" data-icon="magnet">吸附 1 m</button><button id="focus" class="icon-btn" title="聚焦所选 F" aria-label="聚焦所选" data-icon="focus"></button></div>
+    <div class="selection-toolbar" id="selection-toolbar" hidden><span id="selection-label"></span><button id="duplicate" title="复制 Ctrl+D" aria-label="复制" data-icon="copy"></button><button id="group" title="把所选物件保存为组合资产" data-icon="group">组合</button><button id="ungroup" title="拆分组合" data-icon="layers">拆分</button><button id="delete" title="删除 Delete" aria-label="删除" data-icon="trash"></button></div>
+    <div class="viewport-help"><span>左键选择</span><span>右键拖动旋转</span><span>滚轮缩放</span><span>Shift 多选</span></div>
+    <div class="axis"><span class="axis-y">Y</span><span class="axis-z">Z</span><span class="axis-x">X</span><i></i></div>
+    <div id="external-update" class="update-banner" hidden><span>另一端已更新工程，本地还有未保存的修改。</span><button id="reload-remote">载入远端版本</button><button id="download-conflict">保存本地副本</button></div>
+  </section>
+  <aside class="inspector panel">
+    <div class="right-tabs"><button class="active" data-right="design"><span data-icon="spark"></span> 设计助手</button><button data-right="scene"><span data-icon="sliders"></span> 场景 / 属性</button></div>
+    <div id="design-panel" class="right-content">
+      <div class="intro"><div class="eyebrow">FROM IDEA TO WORLD</div><h2>把想法，搭成场景。</h2><p>先确认设计草案，再使用千星现成资产布局。<br>默认保留完整原生模型与材质。</p></div>
+      <div class="mode-switch"><button class="active" data-ai-mode="offline">离线布局 <small>无需密钥</small></button><button data-ai-mode="ai">AI 模型 <small>兼容接口</small></button></div>
+      <label class="field-label" for="idea">场景想法</label>
+      <textarea id="idea" rows="5" placeholder="描述地点、氛围、建筑与动线…">森林里的一座溪畔小村，4栋木质房屋，溪上有木桥，入口有拱门，留出散步的道路。</textarea>
+      <div class="idea-chips"><button data-idea="小型林间营地，3个帐篷，中央篝火区域和瞭望塔">林间营地</button><button data-idea="被森林环绕的古老石质遗迹，入口石门，空旷的中央广场">林中遗迹</button><button data-idea="山间小集市，6栋房屋，摊位、水井和入口拱门">山间集市</button></div>
+      <button id="make-plan" class="primary wide" data-icon="spark">生成设计草案</button>
+      <div id="generation-status" class="generation-status" role="status" hidden></div>
+      <section id="plan-card" class="plan-card" hidden>
+        <div class="card-heading"><span class="step">01</span><h3>设计草案</h3><span id="plan-origin" class="mini-badge"></span></div>
+        <input id="plan-title" class="plan-title" aria-label="设计名称"><textarea id="plan-summary" class="plan-summary" rows="3" aria-label="设计思路"></textarea>
+        <div class="plan-numbers"><label>宽度 / m<input id="plan-width" type="number" min="24" max="200"></label><label>纵深 / m<input id="plan-depth" type="number" min="24" max="200"></label><label>建筑<input id="plan-buildings" type="number" min="0" max="30"></label><label>树木<input id="plan-trees" type="number" min="0" max="160"></label></div>
+        <div id="plan-zones" class="zone-list"></div><label class="check-label"><input type="checkbox" id="plan-water">溪流与木桥 <small>缺少原生水体时列为待补充</small></label>
+        <div class="generate-controls"><select id="generation-action" aria-label="生成场景的方式"><option value="replace">替换当前场景（可撤销）</option><option value="append">追加到当前场景</option></select><button id="make-scene" class="primary wide" data-icon="layers">生成可编辑场景</button></div>
+      </section>
+      <section class="asset-maker"><div class="card-heading"><span class="step">02</span><h3>添加场景物件</h3><span class="mini-badge">原生优先</span></div><p>先从千星资产库寻找现成模型。独特造型缺少匹配时，可选择基元补充。</p><textarea id="asset-idea" rows="2" placeholder="例如：木质桥梁，或带布棚的集市摊位"></textarea><label class="check-label primitive-permission"><input id="allow-primitive-asset" type="checkbox"><span>无匹配原生资产时允许基元补充</span></label><button id="make-asset" class="secondary wide" data-icon="cube">查找并添加物件</button><small id="asset-mode-note">默认只添加现成原生模型；基元组合需勾选上方选项。</small></section>
+      <div class="design-foot"><span data-icon="link"></span><div>也可通过 MCP 让外部 AI 直接编辑场景。<button id="mcp-help">查看接入方式 ↗</button></div></div>
+    </div>
+    <div id="scene-panel" class="right-content" hidden>
+      <div id="object-inspector" class="object-inspector"><div class="empty-inspector"><span data-icon="cube"></span><b>选择一个场景物件</b><p>在画布或列表中选择后，可以编辑坐标、旋转和缩放。</p></div></div>
+      <div class="outliner-heading"><h3>场景物件 <span id="node-count">0</span></h3><button id="select-all" title="选择全部">全选</button></div>
+      <label class="search small"><span data-icon="search"></span><input id="outliner-search" placeholder="筛选场景物件" aria-label="筛选场景物件"></label><div id="outliner" class="outliner"></div>
+      <button id="export-glb" class="secondary wide glb-button" data-icon="download">导出当前场景 GLB</button><p class="aside-note">GLB 可在 Blender 中打开；GIA 将固定布景导出为独立静态单位。</p>
+    </div>
+  </aside>
+</main>
+<footer class="statusbar"><div><span class="status-dot"></span><span id="object-stats">正在读取工程</span><span class="status-divider">|</span><span id="render-stats"></span></div><div id="load-status"></div><div><span class="native-status">GIA 文件校验 · 游戏内验收待完成</span><a id="about" href="#">GPL-3.0 开源</a></div></footer>
+<div id="toast-stack" class="toast-stack" aria-live="polite"></div>
+<input type="file" id="project-file" accept=".json,.starscene" hidden>
+<dialog id="settings-dialog" class="modal settings-modal"><form method="dialog"><button class="close" aria-label="关闭">×</button></form><div class="eyebrow">CONNECT YOUR MODEL</div><h2>模型接口</h2><p class="modal-lead">支持本地模型和 OpenAI 兼容的 Chat Completions 接口。</p><label>接口地址<input id="provider-url" placeholder="http://localhost:11434/v1"></label><label>模型名称<input id="provider-model" placeholder="填写服务中的实际模型 ID"></label><label>API 密钥 <small>本次服务运行期间保存在内存</small><input id="provider-key" type="password" autocomplete="off" placeholder="本地无鉴权服务可以留空"></label><label class="check-label"><input id="provider-json" type="checkbox" checked>发送 JSON 模式参数</label><label>输出长度参数 <small>按服务文档选择</small><select id="provider-token-parameter"><option value="max_tokens">max_tokens（常见兼容服务）</option><option value="max_completion_tokens">max_completion_tokens</option></select></label><label>输出 token 上限<input id="provider-max-tokens" type="number" min="1024" max="32768" value="12000"></label><p class="aside-note">地址和模型名称保存到本机配置。密钥不写入工程或配置文件；也可用 STARSCENE_AI_KEY 环境变量。生成请求仅在选择 AI 模式并点击生成后发送。</p><div class="modal-actions"><button id="clear-key">清除内存密钥</button><button id="save-provider" class="primary">保存接口设置</button></div><hr><h3>本机资产库</h3><p id="asset-root-info" class="path-info"></p><p class="aside-note">需要更换目录时，修改 config.local.json 的 assetRoot 并重启服务。源码不包含游戏模型。</p></dialog>
+<dialog id="export-dialog" class="modal export-modal"><form method="dialog"><button class="close" aria-label="关闭">×</button></form><div class="eyebrow">BACK TO MILIASTRA</div><h2>导出千星场景</h2><div id="export-content"></div></dialog>
+<dialog id="help-dialog" class="modal help-modal"><form method="dialog"><button class="close" aria-label="关闭">×</button></form><div class="eyebrow">OPEN WORKSPACE</div><h2 id="help-title"></h2><div id="help-content"></div></dialog>
+<script type="module" src="/app.js"></script>
+</body></html>

@@ -1,0 +1,23 @@
+name: 功能建议
+description: 提出具体需求和使用场景。
+title: '[建议] '
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 要解决的问题
+      description: 描述目前哪一步不方便，以及实际使用场景。
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 希望的行为
+      description: 说明输入、操作和期望输出；涉及游戏资产时可填写名称或模板编号，无需上传模型文件。
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 现有替代方式或参考
+      description: 可选，附脱敏截图或公开链接。
