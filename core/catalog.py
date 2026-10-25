@@ -1,4 +1,4 @@
-"""Index a user-owned, external library; game files never live in this repository."""
+"""Index the configured library, including a bundled portable installation."""
 import json,os,re,threading
 from pathlib import Path
 from .branding import environment
@@ -11,7 +11,8 @@ class Catalog:
     def __init__(self,path=None):
         config=ROOT/'config.local.json'
         local=json.loads(config.read_text('utf-8-sig')) if config.is_file() else {}
-        raw=path or environment('ASSET_ROOT') or local.get('assetRoot') or '../Miliastra-Asset-Library'
+        bundled='library' if (ROOT/'library'/'inventory.json').is_file() else '../Miliastra-Asset-Library'
+        raw=path or environment('ASSET_ROOT') or local.get('assetRoot') or bundled
         self.root=(ROOT/raw).resolve() if not Path(raw).is_absolute() else Path(raw).resolve()
         self.path=ROOT/'projects'/'bindings.json';self.path.parent.mkdir(exist_ok=True)
         self.bindings=json.loads(self.path.read_text('utf-8')) if self.path.is_file() else {}

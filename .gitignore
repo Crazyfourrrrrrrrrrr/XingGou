@@ -18,3 +18,7 @@ node_modules/
 .env.*
 .DS_Store
 Thumbs.db
+
+# Large model/runtime payloads are distributed in the full release archive.
+library/
+runtime/

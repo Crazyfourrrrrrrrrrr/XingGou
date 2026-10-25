@@ -3,7 +3,7 @@ import os
 
 TOOL = 'XingGou'
 DISPLAY_NAME = '星构工具箱'
-VERSION = '0.2.0'
+VERSION = '0.3.0'
 LEGACY_TOOLS = ('StarSceneStudio', 'StarScene Studio')
 
 

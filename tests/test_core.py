@@ -1,6 +1,7 @@
 import copy,json,math,os,struct,subprocess,sys,tempfile,threading,unittest,urllib.error,urllib.request,zipfile
 from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
+from unittest.mock import patch
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from core.catalog import Catalog
 from core.scene import empty,validate,flatten,ProjectStore
@@ -20,6 +21,37 @@ class SceneTests(unittest.TestCase):
         self.assertEqual(len(CAT.assets),2996);self.assertEqual(sum(a['exportable'] for a in CAT.assets),2367)
         self.assertTrue(CAT.model_path('20002078').is_file());self.assertFalse(next(a for a in CAT.assets if a['id'].startswith('terrain-'))['exportable'])
         self.assertEqual(CAT.by_id['10009001']['primitive'],'box')
+    def test_catalog_portable_library_and_explicit_settings_precedence(self):
+        # Metadata-only libraries prove which source was loaded; no game model
+        # or private installation configuration is needed for this test.
+        install=self.path/'portable';install.mkdir()
+        libraries={name:install/name for name in ('library','configured','old-env','new-env','explicit')}
+        libraries['legacy']=install.parent/'Miliastra-Asset-Library'
+        ids={}
+        for index,(name,path) in enumerate(libraries.items()):
+            path.mkdir();ids[name]=str(21000000+index)
+            row=dict(id=int(ids[name]),internal_name='House_'+name,name='测试房屋 '+name,group='建筑',glb='metadata-only.glb')
+            (path/'inventory.json').write_text(json.dumps([row]),'utf-8')
+        def selected(name,catalog):
+            self.assertEqual(catalog.root,libraries[name].resolve())
+            self.assertTrue(catalog.available)
+            self.assertIn(ids[name],catalog.by_id)
+        with patch('core.catalog.ROOT',install),patch.dict(os.environ,{},clear=False):
+            os.environ.pop('XINGGOU_ASSET_ROOT',None);os.environ.pop('STARSCENE_ASSET_ROOT',None)
+            selected('library',Catalog())
+            config=install/'config.local.json';config.write_text(json.dumps(dict(assetRoot='configured')),'utf-8')
+            selected('configured',Catalog())
+            os.environ['STARSCENE_ASSET_ROOT']='old-env';selected('old-env',Catalog())
+            os.environ['XINGGOU_ASSET_ROOT']='new-env';selected('new-env',Catalog())
+            selected('explicit',Catalog('explicit'))
+            # With no override or bundled inventory, existing adjacent-library
+            # installations continue to work; a completely absent library must
+            # still expose only the eleven explicit primitive entries.
+            config.unlink();os.environ.pop('XINGGOU_ASSET_ROOT');os.environ.pop('STARSCENE_ASSET_ROOT')
+            (libraries['library']/'inventory.json').unlink();selected('legacy',Catalog())
+            (libraries['legacy']/'inventory.json').unlink();missing=Catalog()
+            self.assertFalse(missing.available);self.assertEqual(len(missing.assets),11)
+            self.assertTrue(all(asset['primitive'] for asset in missing.assets))
     def test_rotation_contract_and_reject_shear(self):
         self.assertAlmostEqual(mv(rotation([0,90,0]),[1,0,0])[2],-1)
         s=empty();s['definitions']['custom_a']=dict(components=[node('10009001','梁',rotation=(0,45,0))]);s['nodes']=[node('custom_a','组合',scale=(2,1,1))]

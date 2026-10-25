@@ -1,6 +1,8 @@
 @echo off
 setlocal
 cd /d "%~dp0"
+set "XINGGOU_PY=%~dp0runtime\python\python.exe"
+if exist "%XINGGOU_PY%" goto bundled
 set "XINGGOU_PY=%USERPROFILE%\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe"
 if exist "%XINGGOU_PY%" goto bundled
 where py >nul 2>nul

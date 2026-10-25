@@ -4,13 +4,13 @@
 
 在本机浏览器里，用千星奇域的现有原生资产设计场景，把文字想法转成可编辑布局，再导出 GIA 或带材质的 GLB。
 
-**v0.2.0 · GPL-3.0 · Python 3.10+**
+**v0.3.0 · Windows x64 便携完整版 · 工具源码 GPL-3.0**
 
 原 StarScene Studio 现更名为 **XingGou / 星构工具箱**；继续兼容旧 `.starscene.json` 工程和 `STARSCENE_*` 环境变量。
 
 [![Tests](https://github.com/Crazyfourrrrrrrrrrr/XingGou/actions/workflows/tests.yml/badge.svg)](https://github.com/Crazyfourrrrrrrrrrr/XingGou/actions/workflows/tests.yml)
 
-[下载最新版本](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/latest) · [观看宣传视频 · 1080p](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.2.0/XingGou-promo-1080p.mp4) · [报告问题](https://github.com/Crazyfourrrrrrrrrrr/XingGou/issues/new/choose)
+[下载完整素材版](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.3.0/XingGou-0.3.0-full.zip) · [源码版](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.3.0/XingGou-0.3.0-source.zip) · [观看 v0.2.0 宣传视频 · 1080p](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.2.0/XingGou-promo-1080p.mp4) · [报告问题](https://github.com/Crazyfourrrrrrrrrrr/XingGou/issues/new/choose)
 
 - 搜索本地模型、拖放布景、变换编辑、多选组合、撤销重做和自动保存。
 - 优先复用完整原生模型与原材质；缺资源时列出缺项，不自动用白模拼搭替代。
@@ -18,40 +18,61 @@
 - 无密钥的离线规则布局，以及可配置的 OpenAI 兼容接口：文字 → 草案 → 场景。
 - GIA 引用游戏原生模板；GLB 可导入 Blender。另提供 stdio MCP，让外部 AI 客户端编辑同一工程。
 
-**仓库只提供工具源码，不附游戏模型、贴图或完整资产目录。** 使用者需自行准备有权使用的本地资产库，并确认用于 GIA 的模型模板编号。软件许可不会授予游戏资产的分发权。
+**首选下载完整素材版。** 包含 **2,996 个独立 GLB 模型、3,291 张实际内嵌图片**及目录索引，附官方 Python 3.15.1 Windows x64 运行时。Windows 64 位用户完整解压后双击启动即可，**无需预装 Python 或另配素材库**。单独源码版不附素材和运行时，供自行配置使用。工具代码按 GPL-3.0 发布；模型、贴图保留原有权利，Python 运行时采用 PSF 许可。
 
-[发布说明](docs/RELEASE-v0.2.0.md) · [验证记录](docs/VALIDATION.md) · [贡献指南](docs/CONTRIBUTING.md) · [第三方来源](THIRD_PARTY.md)
+[发布说明](docs/RELEASE-v0.3.0.md) · [验证记录](docs/VALIDATION.md) · [贡献指南](docs/CONTRIBUTING.md) · [第三方来源](THIRD_PARTY.md)
 
 [![观看 XingGou 星构工具箱宣传视频](docs/images/editor-example.png)](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.2.0/XingGou-promo-1080p.mp4)
 
-截图来自实际编辑器测试；所示模型、材质和目录来自外部本地资产库，不随仓库分发。
+截图来自实际编辑器测试。上方宣传片为 v0.2.0 的历史介绍，片中“资产自行准备”针对当时的源码版；v0.3.0 完整素材版已包含模型、贴图和索引。
 
 ## 快速开始
 
-运行需要 **Python 3.10+** 和支持 WebGL 2 的现代浏览器。日常使用无需 npm、pip、Blender、CDN 或云端托管。
+日常使用需要支持 WebGL 2 的现代浏览器，无需 npm、pip、Blender、CDN 或云端托管。
 
-1. 下载 `XingGou-0.2.0-source.zip` 并解压，进入包含 `launch.py` 的目录。
-2. 将 `config.example.json` 复制为 `config.local.json`，配置自己的资产库路径。资产库格式见下文。
-3. 启动：
+### Windows x64 完整素材版（推荐）
+
+1. 下载 `XingGou-0.3.0-full.zip`，完整解压。
+2. 双击 **`启动星构.cmd`**。包内已含 Python 3.15.1 x64 和模型库，无需预装 Python、复制配置文件或另找素材。
+3. 关闭服务时双击 `停止星构.cmd`。
+
+程序通常打开 <http://127.0.0.1:8770>，端口占用时在 8771–8790 中选择空闲端口。保留解压后的相对目录结构：
+
+```text
+XingGou/
+├─ 启动星构.cmd
+├─ 停止星构.cmd
+├─ launch.py
+├─ library/             # 模型、内嵌贴图、索引及尺寸统计
+│  └─ inventory.json
+└─ runtime/
+   └─ python/           # 官方 Windows x64 运行时及 PSF 许可
+      └─ python.exe
+```
+
+完整包同时可供其他平台使用其中的工具和 `library/`；需要自行安装 Python 3.10+，再运行 `python launch.py`。附带的 `runtime/python/` 仅适用于 Windows x64。
+
+### 单独源码版
+
+下载 `XingGou-0.3.0-source.zip`。此包不附模型、贴图或 Python 运行时，需自行安装 **Python 3.10+**，将 `config.example.json` 复制为 `config.local.json`，按下文配置资产库，再启动：
 
 ```sh
 python launch.py
-```
-
-Windows 也可双击 `启动星构.cmd`；需要先安装可用的 Python 3.10+。程序通常打开 <http://127.0.0.1:8770>，端口占用时在 8771–8790 中选择空闲端口。
-
-```sh
 # 仅启动服务，显示网址
 python launch.py --no-browser
-# 停止当前源码目录启动的服务
+# 停止当前目录启动的服务
 python launch.py --stop
 ```
 
-没有外部资产库也能打开编辑器，但不会附带完整千星模型；默认生成会显示缺少可用原生资源。11 种基元仍可手动使用，默认自动布局不以这些基元填补资源缺项。
+没有资产库也能打开编辑器，但默认生成会显示缺少可用原生资源。11 种基元仍可手动使用，默认自动布局不以这些基元填补资源缺项。
 
-## 配置本地资产库
+## 资产库与自定义路径
 
-目录由外部 GLB 文件、索引和可选尺寸统计组成，不要求放在源码目录内：
+完整素材版会自动检测工具目录下的 `library/inventory.json`，通常无需修改配置。本次素材库包含 **2,996 个独立模型，其中 2,367 个已绑定游戏模板编号**；其余可预览，需自行确认绑定，不猜测编号。GLB 文件合计约 **1.58 GB（压缩前）**。
+
+索引共有 3,032 行，包含 2 行模型别名和 34 行无静态模型的状态记录；独立模型数量按实际 GLB 文件统计。本节其余内容适用于源码版或需要切换到其他资产库的用户。
+
+资产库由 GLB 文件、索引和可选尺寸统计组成，也可放在工具目录之外：
 
 ```text
 MyAssetLibrary/
@@ -69,7 +90,7 @@ MyAssetLibrary/
 }
 ```
 
-相对路径以工具源码目录为起点。也可使用绝对路径，或设置环境变量 `XINGGOU_ASSET_ROOT`（兼容 `STARSCENE_ASSET_ROOT`）；修改配置后重启服务。默认路径为 `../Miliastra-Asset-Library`，这个名字表示外部目录，并不表示仓库附带该库。
+相对路径以工具源码目录为起点。也可使用绝对路径，或设置环境变量 `XINGGOU_ASSET_ROOT`（兼容 `STARSCENE_ASSET_ROOT`）；修改配置后重启服务。未显式指定路径时先检测包内 `library/`；没有内置库时沿用旧版的 `../Miliastra-Asset-Library` 路径。
 
 `inventory.json` 是 JSON 数组。下面仅演示结构：
 
@@ -91,7 +112,7 @@ MyAssetLibrary/
 - 如果已准确确认原生模板，可把 `id` 写为 JSON 整数；不要把未知本地编号当作游戏模板编号。
 - 可选的 `master-verification.json` 格式为 `{"assets": [...]}`，记录包含 `internal_name`、`dimensions_in_blender: [x, y, z]` 和可选 `total_triangles`。尺寸采用 Blender Z-UP，目录加载时转换为编辑器 Y-UP。没有统计时尺寸暂按 1×1×1，自动布局间距可能不准确。
 
-目录中的资产数量由使用者自己的库决定。示例工程的可用性也取决于是否具备相同模型及正确模板映射；工具不会下载或补发缺失的游戏资产。
+完整素材版使用随包目录；切换自定义库后，资产数量和示例工程的可用性取决于该库的模型及模板映射。并非所有模型都有已确认的游戏模板编号；未绑定模型可预览，但会阻止 GIA 导出。工具不会猜测绑定或自动补发自定义库中缺失的资产。
 
 ## 编辑与生成
 
@@ -150,6 +171,8 @@ AI 请求发送文字、草案及相关资产名称、编号和尺寸，不发�
 
 0.2.0 更新品牌、仓库与发布文件名，并保留既有工程和环境变量兼容性；原生资产优先、默认静态布景的行为保持不变。无外部资产库的 33 项测试中，23 项通过、10 项资源集成测试明确跳过；新旧请求头、MCP 地址配置与密钥不落盘均有实际检查。宣传片使用独立演示工程实录，确认新界面无脚本错误，导出为 47 个静态单位、0 个动态父级、0 个装饰组件。
 
+0.3.0 增加完整模型库与官方 Python Windows x64 运行时，并自动检测包内 `library/`。便携运行时已实际通过 CMD 启动、服务健康检查及静态 GIA 导出。已有原生资产优先、默认静态导出行为保持不变。
+
 ## MCP 与开发
 
 启动编辑器后，可在支持 stdio MCP 的客户端中配置 `mcp_server.py`。参考 [MCP 配置示例](examples/mcp-config.example.json)填写本机 Python 命令及脚本路径。示例服务名为 `xinggou`；可用 `XINGGOU_URL` 指定已启动服务地址（兼容 `STARSCENE_URL`）。
@@ -182,4 +205,4 @@ HTTP 服务仅监听 `127.0.0.1`。工程、导出、日志和个人配置保存
 
 ## 许可
 
-项目采用 [GPL-3.0](LICENSE)。Three.js 使用 MIT 许可；GIA 编码参考和模板来自固定版本的 Miliastra-Tools。完整来源及许可见 [THIRD_PARTY.md](THIRD_PARTY.md)。
+工具代码采用 [GPL-3.0](LICENSE)。Three.js 使用 MIT 许可；GIA 编码参考和模板来自固定版本的 Miliastra-Tools。完整素材包内的游戏模型和贴图保留原有权利，与工具代码的 GPL 许可分开；官方 Python 运行时按 PSF 许可随包提供，许可文件保留在 `runtime/python/`。来源及许可见 [THIRD_PARTY.md](THIRD_PARTY.md)。
