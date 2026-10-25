@@ -2,6 +2,10 @@
 
 本版提供工具、GLB 素材库和官方 Python Windows x64 运行时。Windows 64 位用户完整解压后双击启动即可，无需预装 Python 或另配素材库；单独源码版继续提供。
 
+[观看 v0.3.0 完整版实录 · 63 秒 1080p](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.3.0/XingGou-promo-1080p.mp4)
+
+新版宣传片介绍内置素材库与 Windows 双击启动，实录演示离线规则生成布局、场景编辑和静态 GIA / GLB 导出。AI 部分为兼容接口配置展示；游戏内验证范围见下文的验证记录。
+
 ## 选择下载包
 
 | 下载包 | 内容 | 启动准备 |
@@ -36,7 +40,7 @@ python launch.py
 
 便携 Python 运行时已实际通过 CMD 启动、服务健康检查及静态 GIA 导出。已有工具测试与静态 V4 定性实机反馈的范围见[验证记录](VALIDATION.md)；本版不宣称新增性能提升。
 
-[v0.2.0 宣传片](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.2.0/XingGou-promo-1080p.mp4)与[发布说明](RELEASE-v0.2.0.md)保留为历史记录。片中“资产自行准备”针对当时的源码分发方式；v0.3.0 完整包已提供模型、贴图和索引，源码版仍需自备。
+[v0.2.0 宣传片](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.2.0/XingGou-promo-1080p.mp4)与[发布说明](RELEASE-v0.2.0.md)保留为历史记录，其中自备资产的说明适用于旧源码版。
 
 本版保持现成完整原生资产优先、固定布景独立静态单位、离线规则和 OpenAI 兼容接口，以及 GIA/GLB 导出；旧 `.starscene.json` 工程和环境变量继续兼容。
 

@@ -10,7 +10,7 @@
 
 [![Tests](https://github.com/Crazyfourrrrrrrrrrr/XingGou/actions/workflows/tests.yml/badge.svg)](https://github.com/Crazyfourrrrrrrrrrr/XingGou/actions/workflows/tests.yml)
 
-[下载完整素材版](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.3.0/XingGou-0.3.0-full.zip) · [源码版](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.3.0/XingGou-0.3.0-source.zip) · [观看 v0.2.0 宣传视频 · 1080p](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.2.0/XingGou-promo-1080p.mp4) · [报告问题](https://github.com/Crazyfourrrrrrrrrrr/XingGou/issues/new/choose)
+[下载完整素材版](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.3.0/XingGou-0.3.0-full.zip) · [源码版](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.3.0/XingGou-0.3.0-source.zip) · [观看完整版实录 · 63 秒 1080p](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.3.0/XingGou-promo-1080p.mp4) · [报告问题](https://github.com/Crazyfourrrrrrrrrrr/XingGou/issues/new/choose)
 
 - 搜索本地模型、拖放布景、变换编辑、多选组合、撤销重做和自动保存。
 - 优先复用完整原生模型与原材质；缺资源时列出缺项，不自动用白模拼搭替代。
@@ -22,9 +22,9 @@
 
 [发布说明](docs/RELEASE-v0.3.0.md) · [验证记录](docs/VALIDATION.md) · [贡献指南](docs/CONTRIBUTING.md) · [第三方来源](THIRD_PARTY.md)
 
-[![观看 XingGou 星构工具箱宣传视频](docs/images/editor-example.png)](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.2.0/XingGou-promo-1080p.mp4)
+[![观看 XingGou v0.3.0 完整版实录 · 63 秒 1080p](docs/images/editor-example.png)](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.3.0/XingGou-promo-1080p.mp4)
 
-截图来自实际编辑器测试。上方宣传片为 v0.2.0 的历史介绍，片中“资产自行准备”针对当时的源码版；v0.3.0 完整素材版已包含模型、贴图和索引。
+63 秒 1080p 宣传片介绍内置素材与 Windows 双击启动，实录演示离线规则布局、场景编辑和静态 GIA / GLB 导出；AI 部分展示兼容接口配置。
 
 ## 快速开始
 
