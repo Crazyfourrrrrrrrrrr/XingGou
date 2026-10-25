@@ -24,7 +24,7 @@ def allowed(rel):
     if top=='web':return value=='web/vendor/three/FILES.json' or rel.suffix in ('.js','.cjs','.css','.html','.svg')
     return False
 def main():
-    target=ROOT.parent/'StarSceneStudio-0.1.3-source.zip';manifest=[]
+    target=ROOT.parent/'StarSceneStudio-0.1.4-source.zip';manifest=[]
     three=json.loads((ROOT/'web/vendor/three/FILES.json').read_text('utf-8'))['files']
     candidates=[ROOT/p for p in FILES]
     for name in DIRS|{'examples'}:candidates.extend(p for p in (ROOT/name).rglob('*') if p.is_file())

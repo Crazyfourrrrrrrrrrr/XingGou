@@ -20,7 +20,7 @@ jobs:
     env:
       PYTHONUTF8: '1'
       # Public CI has no game assets, personal configuration or API credentials.
-      STARSCENE_ASSET_ROOT: ${{ runner.temp }}/starscene-empty-library
+      STARSCENE_ASSET_ROOT: .runtime/ci-empty-library
       STARSCENE_AI_KEY: ''
     steps:
       - uses: actions/checkout@v7

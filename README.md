@@ -4,7 +4,7 @@
 
 在本机浏览器里，用千星奇域的现有原生资产设计场景，把文字想法转成可编辑布局，再导出 GIA 或带材质的 GLB。
 
-**v0.1.3 · GPL-3.0 · Python 3.10+**
+**v0.1.4 · GPL-3.0 · Python 3.10+**
 
 [![Tests](https://github.com/Crazyfourrrrrrrrrrr/starscene-studio/actions/workflows/tests.yml/badge.svg)](https://github.com/Crazyfourrrrrrrrrrr/starscene-studio/actions/workflows/tests.yml)
 
@@ -18,7 +18,7 @@
 
 **仓库只提供工具源码，不附游戏模型、贴图或完整资产目录。** 使用者需自行准备有权使用的本地资产库，并确认用于 GIA 的模型模板编号。软件许可不会授予游戏资产的分发权。
 
-[发布说明](docs/RELEASE-v0.1.3.md) · [验证记录](docs/VALIDATION.md) · [贡献指南](docs/CONTRIBUTING.md) · [第三方来源](THIRD_PARTY.md)
+[发布说明](docs/RELEASE-v0.1.4.md) · [验证记录](docs/VALIDATION.md) · [贡献指南](docs/CONTRIBUTING.md) · [第三方来源](THIRD_PARTY.md)
 
 ![编辑器中的原生资产场景示例](docs/images/editor-example.png)
 
@@ -142,13 +142,23 @@ AI 请求发送文字、草案及相关资产名称、编号和尺寸，不发�
 
 2026-10-25，测试者实际导入包含 **47 个完整原生模型、0 个基元**的静态 V4“溪畔小聚”后，反馈“负荷正常了”。这是定性实机确认，没有新区域负载数值，因此不宣称具体节省比例，也不把这次反馈扩大为材质、精确 TRS、碰撞或批量操作的专项验收。
 
-0.1.3 静态导出的主变更完成时，33 项 Python 单元与集成测试通过，隔离浏览器回归没有非预期错误。后续仅命名修复未重跑整套测试。历史 0.1.2 GLB 已独立导入 Blender 5.2.2 LTS，36 张贴图全部内嵌、无无效图像。完整范围与版本区别见[验证记录](docs/VALIDATION.md)。
+0.1.3 静态导出的主变更完成时，在配置了真实资产库的本机环境中，33 项 Python 单元与集成测试通过，隔离浏览器回归没有非预期错误。后续仅命名修复未重跑整套测试。历史 0.1.2 GLB 已独立导入 Blender 5.2.2 LTS，36 张贴图全部内嵌、无无效图像。完整范围与版本区别见[验证记录](docs/VALIDATION.md)。
+
+0.1.4 修复首次公开发布后的分发与 CI 配置。无外部资产库的干净源码副本已本地执行全部 33 项测试：22 项通过、11 项依赖真实资产库的集成测试明确跳过。远端 CI 结果以仓库 Actions 为准；本补丁不改变静态布景策略，也不宣称新增性能提升。
 
 ## MCP 与开发
 
 启动编辑器后，可在支持 stdio MCP 的客户端中配置 `mcp_server.py`。参考 [MCP 配置示例](examples/mcp-config.example.json)填写本机 Python 命令及脚本路径。
 
 提供 `catalog_search`、`scene_get`、`scene_replace`、`scene_export`、`asset_recipes`。提交工程时必须携带读取到的 `revision`，防止覆盖网页修改；默认策略同样是原生资产优先、固定布景静态导出。
+
+开发测试使用统一命令：
+
+```sh
+python -m unittest discover -s tests -v
+```
+
+没有真实资产库时，相关资源集成用例会明确跳过；这与配置完整资产库后的全量集成验证、浏览器回归、Blender 验证和游戏实机测试是不同范围。
 
 ```text
 core/catalog.py        外部资产索引与编号绑定

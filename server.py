@@ -8,7 +8,7 @@ from core.generator import Provider,generate_plan,generate_scene,generate_asset,
 from core.gia import export_scene,ExportBlocked
 
 ROOT=Path(__file__).resolve().parent
-VERSION='0.1.3'
+VERSION='0.1.4'
 class App:
     def __init__(self):
         self.catalog=Catalog();self.store=ProjectStore(ROOT/'projects',self.catalog);self.provider=Provider(ROOT/'projects');self.exports=ROOT/'exports'
