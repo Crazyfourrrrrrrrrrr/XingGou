@@ -22,11 +22,11 @@
 - `wire.py` SHA-256：`831f2d4924281d2185bdf45738c4d8c9b946f3bc4fcc822261c16aa76f0b9e97`。
 - 使用独立的轻量包入口，避免加载图像、GUI 和 protobuf 的无关依赖；上面两个源文件未修改。
 
-原生 ID 段检查参考本机 BrickForge 已修正的实现与原生模板证据：实体 `0x40400000`，装饰物 `0x40000000`，只在低 20 位分配随机非零编号。星构独立实现了场景原点、链接和世界变换回读检查，不复用其运动/指针等积木游戏组件。
+原生 ID 段检查参考本机 BrickForge 已修正的实现与原生模板证据：实体 `0x40400000`，装饰物 `0x40000000`，只在低 20 位分配随机非零编号。星构工具箱独立实现了场景原点、链接和世界变换回读检查，不复用其运动/指针等积木游戏组件。
 
 ## 外部资产与目录
 
-- 模型和贴图属于用户配置的外部游戏资产库，StarScene 源码包不含这些文件。
+- 模型和贴图属于用户配置的外部游戏资产库，XingGou 源码包不含这些文件。
 - 当前本机库的原生目录映射来自既有提取流程；原始目录参考 `hang-ZYM/qianxing-format-docs`（目录数据 CC BY 4.0），经 `8itlab/genshin-miliastra-mcp`（代码 MIT）的目录资料对照。具体来源记录保留在外部库 `provenance/`。
 - 资产原本的游戏/作者权利不因软件 GPL 或目录许可而改变。
 
@@ -35,9 +35,9 @@
 - OpenAI Chat Completions 参数：<https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create>
 - JSON 模式与输出检查：<https://developers.openai.com/api/docs/guides/structured-outputs>
 - JSON 模式只能帮助保证 JSON 语法；本工具另行验证场景结构和目录编号。不同兼容服务的参数支持情况以其文档为准。
-- 用户提及的“渊星工具箱”工作流参考作者公开演示：<https://www.bilibili.com/video/BV1rcHr6uEji/>。StarScene 为独立编写的本机网页实现，未复制该工具源码、界面资产或商业服务。
+- 用户提及的“渊星工具箱”工作流参考作者公开演示：<https://www.bilibili.com/video/BV1rcHr6uEji/>。XingGou 为独立编写的本机网页实现，未复制该工具源码、界面资产或商业服务。
 
-星构源码中的其余界面、场景 schema、离线布局、基元配方、接口、MCP 桥接与测试为本项目实现，按 GPL-3.0 分发。
+星构工具箱源码中的其余界面、场景 schema、离线布局、基元配方、接口、MCP 桥接与测试为本项目实现，按 GPL-3.0 分发。
 
 ## 0.1.1 坐标转换依据
 

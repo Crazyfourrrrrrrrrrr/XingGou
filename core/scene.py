@@ -15,7 +15,7 @@ def vec(value,default,scale=False):
     return list(map(float,v))
 
 def validate(scene,catalog):
-    if not isinstance(scene,dict) or scene.get('schema')!=SCHEMA:raise ValueError('请打开 StarScene 工程（starscene/1）')
+    if not isinstance(scene,dict) or scene.get('schema')!=SCHEMA:raise ValueError('请打开 XingGou 星构工具箱工程（兼容 starscene/1）')
     s=copy.deepcopy(scene);defs=s.get('definitions',{})
     if not isinstance(defs,dict) or len(defs)>300:raise ValueError('自定义资产数量超出本工具预算')
     if not isinstance(s.get('nodes'),list) or len(s['nodes'])>5000:raise ValueError('本工具单工程最多 5000 个对象')

@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 320" role="img" aria-labelledby="title desc">
-<title id="title">星构 StarScene Studio</title><desc id="desc">本机千星奇域场景编辑器，原生资产优先，静态导出，文字生成布局。</desc>
+<title id="title">星构工具箱 XingGou</title><desc id="desc">星构工具箱 XingGou，本机千星奇域场景编辑器，原生资产优先，静态导出，文字生成布局。</desc>
 <defs><linearGradient id="bg"><stop stop-color="#113b35"/><stop offset="1" stop-color="#286956"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="skewX(-20)"><path d="M40 0H0V40" fill="none" stroke="#e0eedc" stroke-opacity=".08"/></pattern></defs>
 <rect width="1280" height="320" rx="22" fill="url(#bg)"/><rect width="1280" height="320" rx="22" fill="url(#grid)"/>
 <rect x="60" y="65" width="66" height="66" rx="18" fill="#f0f0dc"/>
 <path d="m93 77 6 20 19 1-19 8-6 18-6-18-19-8 19-1z" fill="#245d4c"/>
 <g fill="#f5f4e5" font-family="system-ui,Segoe UI,Microsoft YaHei,sans-serif">
-<text x="150" y="112" font-size="40" font-weight="700">星构 StarScene Studio</text>
+<text x="150" y="112" font-size="40" font-weight="700">星构工具箱 XingGou</text>
 <text x="64" y="181" font-size="23" fill="#d4e5d5">把想法，搭成场景。</text>
 <text x="64" y="222" font-size="17" fill="#b9d1bd">千星原生资产优先 · 本机浏览器编辑 · 静态 GIA / GLB 导出</text>
 <text x="64" y="276" font-size="15" fill="#b9d1bd">OPEN SOURCE · GPL-3.0 · PYTHON 3.10+</text></g>

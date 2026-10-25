@@ -5,7 +5,7 @@ const root=path.resolve(__dirname,'..'),out=path.join(root,'.runtime','qa');fs.m
 (async()=>{
  browser=await chromium.launch({channel:'msedge',headless:true,chromiumSandbox:true,ignoreDefaultArgs:['--unsafely-disable-devtools-self-xss-warnings'],args:['--enable-webgl','--ignore-gpu-blocklist']});
  const context=await browser.newContext({viewport:{width:1540,height:980},acceptDownloads:true});const page=await context.newPage();const errors=[];let expectedBlocked=false;page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error'&&!(expectedBlocked&&m.text().includes('422')))errors.push(m.text())});
- const base=process.env.STARSCENE_URL||'http://127.0.0.1:8770';
+ const base=process.env.XINGGOU_URL||process.env.STARSCENE_URL||'http://127.0.0.1:8770';
  const bootResponse=await context.request.get(base+'/api/boot');if(!bootResponse.ok())throw Error('Boot API failed: '+bootResponse.status());const boot=await bootResponse.json();
  const canonical=new Map(boot.catalog.flatMap(a=>[[String(a.id),a],...(a.aliases||[]).map(x=>[String(x.id),a])]));
  function assertNativeProject(project,label){

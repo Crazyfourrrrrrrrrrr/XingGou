@@ -111,11 +111,11 @@ class HttpTests(unittest.TestCase):
         cls.mock=ThreadingHTTPServer(('127.0.0.1',0),MockModel);threading.Thread(target=cls.mock.serve_forever,daemon=True).start()
     @classmethod
     def tearDownClass(cls):cls.server.shutdown();cls.server.server_close();cls.mock.shutdown();cls.mock.server_close();cls.tmp.cleanup()
-    def request(self,path,data=None,extra=None):
-        req=urllib.request.Request(self.url+path,data=json.dumps(data).encode() if data is not None else None,headers={'Content-Type':'application/json','X-StarScene':'1',**(extra or {})})
+    def request(self,path,data=None,extra=None,client_header='X-XingGou'):
+        req=urllib.request.Request(self.url+path,data=json.dumps(data).encode() if data is not None else None,headers={'Content-Type':'application/json',client_header:'1',**(extra or {})})
         return urllib.request.build_opener(urllib.request.ProxyHandler({})).open(req,timeout=15)
     def test_ready_assets_model_range_and_static_confinement(self):
-        with self.request('/api/health') as r:self.assertEqual(json.load(r)['tool'],'StarSceneStudio')
+        with self.request('/api/health') as r:self.assertEqual(json.load(r)['tool'],'XingGou')
         if CAT.available:
             with self.request('/models/20002078.glb',extra={'Range':'bytes=0-11'}) as r:self.assertEqual(r.status,206);self.assertEqual(r.read()[:4],b'glTF')
         for path in ('/%2e%2e/server.py','/models/../../server.py','/download/%2e%2e/server.py'):
@@ -124,10 +124,12 @@ class HttpTests(unittest.TestCase):
     def test_cross_site_and_revision_rejected(self):
         with self.assertRaises(urllib.error.HTTPError) as e:self.request('/api/project',{}, {'Origin':'https://example.invalid'})
         self.assertEqual(e.exception.code,403)
-        rev=self.server.app.store.get()['revision']
-        with self.request('/api/project',dict(project=empty(),revision=rev)) as r:self.assertEqual(r.status,200)
-        with self.assertRaises(urllib.error.HTTPError) as e:self.request('/api/project',dict(project=empty(),revision=rev))
-        self.assertEqual(e.exception.code,409)
+        for client_header in ('X-XingGou','X-StarScene'):
+            with self.subTest(client_header=client_header):
+                rev=self.server.app.store.get()['revision']
+                with self.request('/api/project',dict(project=empty(),revision=rev),client_header=client_header) as r:self.assertEqual(r.status,200)
+                with self.assertRaises(urllib.error.HTTPError) as e:self.request('/api/project',dict(project=empty(),revision=rev),client_header=client_header)
+                self.assertEqual(e.exception.code,409)
     def test_export_endpoint_defaults_to_static_and_rejects_unbound(self):
         scene=empty('静态 HTTP 测试');scene['nodes']=[node('10009001','显式基元')]
         with self.request('/api/export',dict(project=scene)) as response:result=json.load(response)
@@ -141,18 +143,27 @@ class HttpTests(unittest.TestCase):
             self.assertEqual(caught.exception.code,422)
             self.assertEqual(json.load(caught.exception)['blocked'][0]['assetId'],local['id'])
     def test_compatible_api_real_http_without_key_persistence(self):
-        if not CAT.available:self.skipTest('External game library is not configured')
         provider=self.server.app.provider;provider.configure(dict(baseUrl=f'http://127.0.0.1:{self.mock.server_port}/v1',model='test-model',apiKey='test-only-not-a-secret'))
         MockModel.result=offline_plan('森林营地');MockModel.code=200;p=generate_plan('森林营地','ai',provider);self.assertEqual(p['mode'],'ai');self.assertEqual(MockModel.seen['path'],'/v1/chat/completions');self.assertEqual(MockModel.seen['authorization'],'Bearer test-only-not-a-secret');self.assertNotIn('test-only',provider.file.read_text())
-        MockModel.result=empty('模型测试');MockModel.result['nodes']=[node('20002078','原生房屋')];s=generate_scene(p,'ai',CAT,provider);self.assertEqual(s['name'],'模型测试')
+        with self.request('/api/provider') as response:self.assertNotIn('test-only-not-a-secret',response.read().decode('utf-8'))
+        # The compatible API's JSON transport and key handling do not require a
+        # game library. Exercise a native model too when that integration exists.
+        MockModel.result=empty('模型测试')
+        if CAT.available:MockModel.result['nodes']=[node('20002078','原生房屋')]
+        s=generate_scene(p,'ai',CAT,provider);self.assertEqual(s['name'],'模型测试')
         MockModel.result=dict(name='螺旋星形雕塑',description='测试',components=[node('10009001','柱')]);self.assertEqual(generate_asset('螺旋星形雕塑','ai',provider,CAT,allow_primitives=True)['origin'],'ai')
         MockModel.code=401
-        with self.assertRaisesRegex(ValueError,'HTTP 401'):generate_plan('场景','ai',provider)
+        with self.assertRaisesRegex(ValueError,'HTTP 401') as rejected:generate_plan('场景','ai',provider)
+        self.assertNotIn('test-only-not-a-secret',str(rejected.exception))
+        if isinstance(rejected.exception.__cause__,urllib.error.HTTPError):rejected.exception.__cause__.close()
         MockModel.code=200
     def test_mcp_stdio_connects_to_same_engine(self):
         messages=[dict(jsonrpc='2.0',id=1,method='initialize',params={}),dict(jsonrpc='2.0',id=2,method='tools/list'),dict(jsonrpc='2.0',id=3,method='tools/call',params=dict(name='catalog_search',arguments=dict(query='长方体',ready=True,limit=3))),dict(jsonrpc='2.0',id=4,method='tools/call',params=dict(name='scene_get',arguments={}))]
-        env=os.environ.copy();env['STARSCENE_URL']=self.url
-        result=subprocess.run([sys.executable,str(ROOT/'mcp_server.py')],input='\n'.join(json.dumps(x,ensure_ascii=False) for x in messages)+'\n',text=True,encoding='utf-8',capture_output=True,env=env,timeout=20,creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)
-        self.assertEqual(result.returncode,0,result.stderr);rows=[json.loads(x) for x in result.stdout.splitlines()];self.assertEqual(len(rows),4);self.assertEqual(rows[0]['result']['serverInfo']['name'],'StarScene Studio');self.assertEqual(len(rows[1]['result']['tools']),5);self.assertFalse(rows[2]['result'].get('isError'));self.assertIn('revision',json.loads(rows[3]['result']['content'][0]['text']))
+        for preferred in (False,True):
+            with self.subTest(new_environment_priority=preferred):
+                env=os.environ.copy();env.pop('XINGGOU_URL',None);env['STARSCENE_URL']=self.url
+                if preferred:env.update(XINGGOU_URL=self.url,STARSCENE_URL='http://127.0.0.1:1')
+                result=subprocess.run([sys.executable,str(ROOT/'mcp_server.py')],input='\n'.join(json.dumps(x,ensure_ascii=False) for x in messages)+'\n',text=True,encoding='utf-8',capture_output=True,env=env,timeout=20,creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)
+                self.assertEqual(result.returncode,0,result.stderr);rows=[json.loads(x) for x in result.stdout.splitlines()];self.assertEqual(len(rows),4);self.assertEqual(rows[0]['result']['serverInfo']['name'],'XingGou');self.assertEqual(len(rows[1]['result']['tools']),5);self.assertFalse(rows[2]['result'].get('isError'));self.assertIn('revision',json.loads(rows[3]['result']['content'][0]['text']))
 
 if __name__=='__main__':unittest.main(verbosity=2)

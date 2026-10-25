@@ -9,6 +9,7 @@ from .scene import flatten,validate
 from .math3d import affine,combine
 from .coordinates import native_object,reflected_affine
 from .naming import export_label
+from .branding import TOOL,VERSION
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'vendor'/'miliastra_tools'))
@@ -104,9 +105,9 @@ def check(blob,expected=None,*,expected_space='native'):
                 if err>max(0.0002,abs(b)*0.000002):raise ValueError('GIA 世界变换回读不一致')
     return dict(fileStructure='passed',nativeIdDomains='passed',parentChildLinks='passed',worldTransforms='passed' if expected is not None else 'not_checked',expectedCoordinateSpace=expected_space,coordinateConversion='passed' if expected is not None and expected_space=='editor' else 'not_checked',maxTransformError=max_error,parents=len(parents),components=len(decs),nativeEditorValidation='pending')
 
-LEGACY_IMPORT_STEPS='''星构场景导入说明（旧动态装饰包装模式）
+LEGACY_IMPORT_STEPS='''XingGou 星构工具箱场景导入说明（旧动态装饰包装模式）
 
-1. 解压，保留 .gia 和导出报告；.starscene.json 可在星构继续编辑。
+1. 解压，保留 .gia 和导出报告；.starscene.json 可在 XingGou 星构工具箱继续编辑。
 2. 将 .gia 放入原神 Beyond_Local_Export 文件夹，常见位置：
    %USERPROFILE%\\AppData\\LocalLow\\miHoYo\\原神\\BeyondLocal\\Beyond_Local_Export
 3. 在千星奇域编辑器的“资产导入导出管理 → 加载外部资产”中加载。
@@ -122,7 +123,7 @@ LEGACY_IMPORT_STEPS='''星构场景导入说明（旧动态装饰包装模式）
 预览材质为近似效果，特殊着色器以游戏实际效果为准。
 '''
 
-IMPORT_STEPS='''星构静态布景导入说明
+IMPORT_STEPS='''XingGou 星构工具箱静态布景导入说明
 
 1. 解压，保留 .gia、.starscene.json 和检查报告。
 2. 将 .gia 放入：
@@ -164,7 +165,7 @@ def export_scene(scene,catalog,directory,*,mode='static_entities'):
     checks=check(gia.read_bytes(),objects,expected_space='editor')
     used={o['asset_id'] for o in objects}
     bindings=[dict(assetId=a['id'],name=a['name'],templateId=a['templateId']) for a in catalog.assets if a['id'] in used and a.get('userBinding')]
-    report=dict(tool='StarScene Studio',version='0.1.4',exportMode=mode,sceneName=scene['name'],createdAt=datetime.datetime.now(datetime.timezone.utc).isoformat(),visibleObjects=len([n for n in scene['nodes'] if n.get('visible',True)]),expandedComponents=len(objects),staticEntities=len(objects) if mode=='static_entities' else 0,dynamicEntities=len(group_records),decorationComponents=0 if mode=='static_entities' else len(objects),checks=checks,userBindings=bindings,sha256=hashlib.sha256(gia.read_bytes()).hexdigest(),groups=group_records,coordinates=dict(editor='Y_UP_RIGHT_HANDED',gia='Y_UP_LEFT_HANDED',mapping='position=(-x,y,z); rotation=(rx,-ry,-rz)'),notes=notes)
+    report=dict(tool=TOOL,version=VERSION,exportMode=mode,sceneName=scene['name'],createdAt=datetime.datetime.now(datetime.timezone.utc).isoformat(),visibleObjects=len([n for n in scene['nodes'] if n.get('visible',True)]),expandedComponents=len(objects),staticEntities=len(objects) if mode=='static_entities' else 0,dynamicEntities=len(group_records),decorationComponents=0 if mode=='static_entities' else len(objects),checks=checks,userBindings=bindings,sha256=hashlib.sha256(gia.read_bytes()).hexdigest(),groups=group_records,coordinates=dict(editor='Y_UP_RIGHT_HANDED',gia='Y_UP_LEFT_HANDED',mapping='position=(-x,y,z); rotation=(rx,-ry,-rz)'),notes=notes)
     def save(filename,value):
         (folder/filename).write_text(json.dumps(value,ensure_ascii=False,indent=2),'utf-8')
     save(name+'.starscene.json',scene);save('export-report.json',report);save('components.json',objects);save('native-components.json',native)

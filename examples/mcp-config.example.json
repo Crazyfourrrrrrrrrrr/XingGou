@@ -1,8 +1,10 @@
 {
   "mcpServers": {
-    "starscene": {
+    "xinggou": {
       "command": "python",
-      "args": ["C:/path/to/StarSceneStudio/mcp_server.py"]
+      "args": [
+        "C:/path/to/XingGou/mcp_server.py"
+      ]
     }
   }
 }

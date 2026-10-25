@@ -2,7 +2,7 @@
 
 AnimeStudio ModelConverter.SetFrame reflects position X and quaternion Y/Z
 while exporting Unity data. Its mesh vertices and normals reflect X as well.
-StarScene edits those right-handed GLBs, so native export must undo that
+XingGou edits those right-handed GLBs, so native export must undo that
 reflection for BOTH position and orientation. For Rz @ Ry @ Rx this is
 position=(-x,y,z), rotation=(rx,-ry,-rz); positive scale is preserved.
 Do not use Mx*R*Mz: that assumes a different primitive's local geometry basis.

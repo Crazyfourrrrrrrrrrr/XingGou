@@ -1,6 +1,7 @@
 """Index a user-owned, external library; game files never live in this repository."""
 import json,os,re,threading
 from pathlib import Path
+from .branding import environment
 
 ROOT=Path(__file__).resolve().parents[1]
 PRIMITIVES={10009001:('长方体','box'),10009002:('球体','sphere'),10009003:('平面','plane'),10009004:('三棱柱','prism3'),10009005:('五棱柱','prism5'),10009006:('三棱锥','pyramid3'),10009007:('五棱锥','pyramid5'),10009008:('圆柱','cylinder'),10009009:('圆锥','cone'),10009010:('线框长方体','wirebox'),10009011:('线框圆柱','wirecylinder')}
@@ -10,7 +11,7 @@ class Catalog:
     def __init__(self,path=None):
         config=ROOT/'config.local.json'
         local=json.loads(config.read_text('utf-8-sig')) if config.is_file() else {}
-        raw=path or os.environ.get('STARSCENE_ASSET_ROOT') or local.get('assetRoot') or '../Miliastra-Asset-Library'
+        raw=path or environment('ASSET_ROOT') or local.get('assetRoot') or '../Miliastra-Asset-Library'
         self.root=(ROOT/raw).resolve() if not Path(raw).is_absolute() else Path(raw).resolve()
         self.path=ROOT/'projects'/'bindings.json';self.path.parent.mkdir(exist_ok=True)
         self.bindings=json.loads(self.path.read_text('utf-8')) if self.path.is_file() else {}

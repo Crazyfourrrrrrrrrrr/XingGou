@@ -2,6 +2,7 @@
 import copy,hashlib,json,math,os,random,re,threading,urllib.error,urllib.request,urllib.parse
 from pathlib import Path
 from .scene import empty,uid,validate
+from .branding import environment
 
 def node(asset,name,position=(0,0,0),scale=(1,1,1),rotation=(0,0,0),color=None,layer='场景'):
     n=dict(id=uid(),assetId=str(asset),name=name,position=list(position),scale=list(scale),rotation=list(rotation),visible=True,locked=False,layer=layer)
@@ -232,8 +233,8 @@ class Provider:
     def __init__(self,root):
         self.file=Path(root)/'provider.local.json';self.lock=threading.RLock()
         c=json.loads(self.file.read_text('utf-8')) if self.file.is_file() else {}
-        self.base=os.environ.get('STARSCENE_AI_BASE_URL',c.get('baseUrl','http://localhost:11434/v1'))
-        self.model=os.environ.get('STARSCENE_AI_MODEL',c.get('model',''));self.key=os.environ.get('STARSCENE_AI_KEY','');self.json_mode=c.get('jsonMode',True)
+        self.base=environment('AI_BASE_URL',c.get('baseUrl','http://localhost:11434/v1'))
+        self.model=environment('AI_MODEL',c.get('model',''));self.key=environment('AI_KEY','');self.json_mode=c.get('jsonMode',True)
         self.token_parameter=c.get('tokenParameter','max_tokens');self.max_tokens=c.get('maxTokens',12000)
     def status(self):
         with self.lock:return dict(baseUrl=self.base,model=self.model,hasKey=bool(self.key),jsonMode=self.json_mode,tokenParameter=self.token_parameter,maxTokens=self.max_tokens)

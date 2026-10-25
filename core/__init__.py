@@ -1,1 +1,1 @@
-"""StarScene local authoring tools."""
+"""XingGou local authoring tools."""

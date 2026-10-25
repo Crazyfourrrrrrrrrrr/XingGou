@@ -1,14 +1,16 @@
-# 星构 StarScene Studio
+# 星构工具箱 XingGou
 
-![星构 StarScene Studio](docs/images/banner.svg)
+![星构工具箱 XingGou](docs/images/banner.svg)
 
 在本机浏览器里，用千星奇域的现有原生资产设计场景，把文字想法转成可编辑布局，再导出 GIA 或带材质的 GLB。
 
-**v0.1.4 · GPL-3.0 · Python 3.10+**
+**v0.2.0 · GPL-3.0 · Python 3.10+**
 
-[![Tests](https://github.com/Crazyfourrrrrrrrrrr/starscene-studio/actions/workflows/tests.yml/badge.svg)](https://github.com/Crazyfourrrrrrrrrrr/starscene-studio/actions/workflows/tests.yml)
+原 StarScene Studio 现更名为 **XingGou / 星构工具箱**；继续兼容旧 `.starscene.json` 工程和 `STARSCENE_*` 环境变量。
 
-[下载最新版本](https://github.com/Crazyfourrrrrrrrrrr/starscene-studio/releases/latest) · [报告问题](https://github.com/Crazyfourrrrrrrrrrr/starscene-studio/issues/new/choose)
+[![Tests](https://github.com/Crazyfourrrrrrrrrrr/XingGou/actions/workflows/tests.yml/badge.svg)](https://github.com/Crazyfourrrrrrrrrrr/XingGou/actions/workflows/tests.yml)
+
+[下载最新版本](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/latest) · [观看宣传视频 · 1080p](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.2.0/XingGou-promo-1080p.mp4) · [报告问题](https://github.com/Crazyfourrrrrrrrrrr/XingGou/issues/new/choose)
 
 - 搜索本地模型、拖放布景、变换编辑、多选组合、撤销重做和自动保存。
 - 优先复用完整原生模型与原材质；缺资源时列出缺项，不自动用白模拼搭替代。
@@ -18,9 +20,9 @@
 
 **仓库只提供工具源码，不附游戏模型、贴图或完整资产目录。** 使用者需自行准备有权使用的本地资产库，并确认用于 GIA 的模型模板编号。软件许可不会授予游戏资产的分发权。
 
-[发布说明](docs/RELEASE-v0.1.4.md) · [验证记录](docs/VALIDATION.md) · [贡献指南](docs/CONTRIBUTING.md) · [第三方来源](THIRD_PARTY.md)
+[发布说明](docs/RELEASE-v0.2.0.md) · [验证记录](docs/VALIDATION.md) · [贡献指南](docs/CONTRIBUTING.md) · [第三方来源](THIRD_PARTY.md)
 
-![编辑器中的原生资产场景示例](docs/images/editor-example.png)
+[![观看 XingGou 星构工具箱宣传视频](docs/images/editor-example.png)](https://github.com/Crazyfourrrrrrrrrrr/XingGou/releases/download/v0.2.0/XingGou-promo-1080p.mp4)
 
 截图来自实际编辑器测试；所示模型、材质和目录来自外部本地资产库，不随仓库分发。
 
@@ -28,7 +30,7 @@
 
 运行需要 **Python 3.10+** 和支持 WebGL 2 的现代浏览器。日常使用无需 npm、pip、Blender、CDN 或云端托管。
 
-1. 下载并解压源码，进入包含 `launch.py` 的目录。
+1. 下载 `XingGou-0.2.0-source.zip` 并解压，进入包含 `launch.py` 的目录。
 2. 将 `config.example.json` 复制为 `config.local.json`，配置自己的资产库路径。资产库格式见下文。
 3. 启动：
 
@@ -67,7 +69,7 @@ MyAssetLibrary/
 }
 ```
 
-相对路径以工具源码目录为起点。也可使用绝对路径，或设置环境变量 `STARSCENE_ASSET_ROOT`；修改配置后重启服务。默认路径为 `../Miliastra-Asset-Library`，这个名字表示外部目录，并不表示仓库附带该库。
+相对路径以工具源码目录为起点。也可使用绝对路径，或设置环境变量 `XINGGOU_ASSET_ROOT`（兼容 `STARSCENE_ASSET_ROOT`）；修改配置后重启服务。默认路径为 `../Miliastra-Asset-Library`，这个名字表示外部目录，并不表示仓库附带该库。
 
 `inventory.json` 是 JSON 数组。下面仅演示结构：
 
@@ -109,7 +111,7 @@ MyAssetLibrary/
 
 兼容接口使用 `POST <baseUrl>/chat/completions`。例如支持该接口的本地服务可配置为 `http://localhost:11434/v1`；具体地址和模型名以使用的服务为准。支持关闭 JSON 模式，以及选择 `max_tokens` 或 `max_completion_tokens`。默认输出上限为 12000 token。
 
-AI 请求发送文字、草案及相关资产名称、编号和尺寸，不发送模型文件或贴图。地址和模型配置保存在本地 `projects/provider.local.json`；密钥只保存在服务内存，也可通过 `STARSCENE_AI_KEY` 提供，停止后需重新输入。兼容接口已用本地模拟 HTTP 服务验证，具体供应商和模型需自行验证。
+AI 请求发送文字、草案及相关资产名称、编号和尺寸，不发送模型文件或贴图。地址和模型配置保存在本地 `projects/provider.local.json`；密钥只保存在服务内存，也可通过 `XINGGOU_AI_KEY` 提供（兼容 `STARSCENE_AI_KEY`），停止后需重新输入。兼容接口已用本地模拟 HTTP 服务验证，具体供应商和模型需自行验证。
 
 ## 导出 GIA 与 GLB
 
@@ -146,9 +148,11 @@ AI 请求发送文字、草案及相关资产名称、编号和尺寸，不发�
 
 0.1.4 修复首次公开发布后的分发与 CI 配置。无外部资产库的干净源码副本已本地执行全部 33 项测试：22 项通过、11 项依赖真实资产库的集成测试明确跳过。远端 CI 结果以仓库 Actions 为准；本补丁不改变静态布景策略，也不宣称新增性能提升。
 
+0.2.0 更新品牌、仓库与发布文件名，并保留既有工程和环境变量兼容性；原生资产优先、默认静态布景的行为保持不变。无外部资产库的 33 项测试中，23 项通过、10 项资源集成测试明确跳过；新旧请求头、MCP 地址配置与密钥不落盘均有实际检查。宣传片使用独立演示工程实录，确认新界面无脚本错误，导出为 47 个静态单位、0 个动态父级、0 个装饰组件。
+
 ## MCP 与开发
 
-启动编辑器后，可在支持 stdio MCP 的客户端中配置 `mcp_server.py`。参考 [MCP 配置示例](examples/mcp-config.example.json)填写本机 Python 命令及脚本路径。
+启动编辑器后，可在支持 stdio MCP 的客户端中配置 `mcp_server.py`。参考 [MCP 配置示例](examples/mcp-config.example.json)填写本机 Python 命令及脚本路径。示例服务名为 `xinggou`；可用 `XINGGOU_URL` 指定已启动服务地址（兼容 `STARSCENE_URL`）。
 
 提供 `catalog_search`、`scene_get`、`scene_replace`、`scene_export`、`asset_recipes`。提交工程时必须携带读取到的 `revision`，防止覆盖网页修改；默认策略同样是原生资产优先、固定布景静态导出。
 

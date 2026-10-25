@@ -1,6 +1,7 @@
-"""Dependency-free stdio MCP bridge to the running local StarScene editor."""
+"""Dependency-free stdio MCP bridge to the running local XingGou editor."""
 import json,os,sys,urllib.error,urllib.request
 from pathlib import Path
+from core.branding import TOOL,VERSION,environment
 ROOT=Path(__file__).resolve().parent
 TOOLS=[
  dict(name='catalog_search',description='搜索本机千星模型；ready=true 仅返回已绑定模板编号的资产。优先选择 primitive 为空的现成完整原生模型，保留原材质。',inputSchema=dict(type='object',properties=dict(query=dict(type='string'),ready=dict(type='boolean'),limit=dict(type='integer',minimum=1,maximum=100)))),
@@ -10,21 +11,21 @@ TOOLS=[
  dict(name='asset_recipes',description='先查找现成完整原生模型，返回 asset.nativeModel=true 时直接引用 asset.id。仅无匹配资源且用户明确允许基元补充时，才传 allowPrimitives=true 返回组合定义。组件数不是游戏官方负载值。',inputSchema=dict(type='object',properties=dict(idea=dict(type='string'),allowPrimitives=dict(type='boolean',default=False)),required=['idea'])),
 ]
 def api(path,data=None):
-    url=os.environ.get('STARSCENE_URL')
+    url=environment('URL')
     if not url:
         try:url=json.loads((ROOT/'.runtime/server.json').read_text())['url']
-        except (OSError,KeyError,ValueError):raise ValueError('请先启动星构本机编辑器')
-    req=urllib.request.Request(url+path,data=json.dumps(data,ensure_ascii=False).encode() if data is not None else None,headers={'Content-Type':'application/json','X-StarScene':'1'})
+        except (OSError,KeyError,ValueError):raise ValueError('请先启动星构工具箱本机编辑器')
+    req=urllib.request.Request(url+path,data=json.dumps(data,ensure_ascii=False).encode() if data is not None else None,headers={'Content-Type':'application/json','X-XingGou':'1','X-StarScene':'1'})
     try:
         with urllib.request.build_opener(urllib.request.ProxyHandler({})).open(req,timeout=180) as r:return json.load(r)
     except urllib.error.HTTPError as e:
         try:message=json.load(e).get('error',f'HTTP {e.code}')
         except ValueError:message=f'HTTP {e.code}'
         raise ValueError(message)
-    except urllib.error.URLError:raise ValueError('无法连接星构服务，请先启动网页编辑器')
+    except urllib.error.URLError:raise ValueError('无法连接星构工具箱服务，请先启动网页编辑器')
 def dispatch(message):
     method=message.get('method');params=message.get('params') or {}
-    if method=='initialize':return dict(protocolVersion='2024-11-05',capabilities={'tools':{}},serverInfo={'name':'StarScene Studio','version':'0.1.3'},instructions='用 catalog_search 检索真实资产，scene_get 读取工程，scene_replace 提交完整 starscene/1 场景（含 revision）。默认优先使用千星现成完整原生模型与原材质；桥、建筑、道路等已有资源不得用基元重造。缺少可导出资源时在 design.notes 记录待补充项，禁止自动白模兜底；只有确无匹配资源且用户明确允许时才以基元补充独特造型。固定布景默认导出为独立静态单位；definitions 仅用于工程组合编辑，导出会展开，不挂动态父实体，不使用父级 0.01 缩放补偿。运动或交互需求需要另行实现与验证，当前工具不生成这些行为。组件数不是游戏官方负载值。工程采用右手 Y-UP，导出器自动转换到游戏左手系；不要手动二次镜像。默认地面 Y=0，沿用工程 settings.groundHeight；不自动创建白模基座。不要猜测模板编号。scene_export 的校验成功不等同游戏内导入成功或负载验收通过。')
+    if method=='initialize':return dict(protocolVersion='2024-11-05',capabilities={'tools':{}},serverInfo={'name':TOOL,'version':VERSION},instructions='用 catalog_search 检索真实资产，scene_get 读取工程，scene_replace 提交完整 starscene/1 场景（含 revision）。默认优先使用千星现成完整原生模型与原材质；桥、建筑、道路等已有资源不得用基元重造。缺少可导出资源时在 design.notes 记录待补充项，禁止自动白模兜底；只有确无匹配资源且用户明确允许时才以基元补充独特造型。固定布景默认导出为独立静态单位；definitions 仅用于工程组合编辑，导出会展开，不挂动态父实体，不使用父级 0.01 缩放补偿。运动或交互需求需要另行实现与验证，当前工具不生成这些行为。组件数不是游戏官方负载值。工程采用右手 Y-UP，导出器自动转换到游戏左手系；不要手动二次镜像。默认地面 Y=0，沿用工程 settings.groundHeight；不自动创建白模基座。不要猜测模板编号。scene_export 的校验成功不等同游戏内导入成功或负载验收通过。')
     if method=='ping':return {}
     if method=='tools/list':return {'tools':TOOLS}
     if method=='tools/call':

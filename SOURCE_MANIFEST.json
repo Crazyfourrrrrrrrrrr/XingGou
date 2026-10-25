@@ -31,28 +31,33 @@
   },
   {
     "path": "core/__init__.py",
-    "bytes": 40,
-    "sha256": "775893f44c096ab764eac7e5dfea7b56a2c7a18cb2ae12a2525affb276f6b126"
+    "bytes": 38,
+    "sha256": "d7e4af82b0f226b8ad6b3543523ab996bb0d0b843f49c6b368e987792d82caec"
+  },
+  {
+    "path": "core/branding.py",
+    "bytes": 615,
+    "sha256": "5338a727331d1d3ce1a9f7773ddfa01bdbf01e0a9079593c692c7cbea1bac975"
   },
   {
     "path": "core/catalog.py",
-    "bytes": 6330,
-    "sha256": "751a7a0b8fde7326b07d7370a926947923be81e0e36fd5df35a7cc9e415f4579"
+    "bytes": 6351,
+    "sha256": "b7b5bbff511af4b9022b66ecca7e7db498b75c0552cfb99233b5a745a20bdf86"
   },
   {
     "path": "core/coordinates.py",
-    "bytes": 1025,
-    "sha256": "1036ddffba21422a6b384da5ccc6d9ac04a1d1424026772cafddb875dddba9bd"
+    "bytes": 1023,
+    "sha256": "d36e19d2fc39025157f1c74a50fd5b2d62a68744b2ff93738fa0bb7a7172c324"
   },
   {
     "path": "core/generator.py",
-    "bytes": 27077,
-    "sha256": "6c6baea779b9e66526e89eeeb615f75043ead78456c17d5062f61c8dc10473b6"
+    "bytes": 27072,
+    "sha256": "d54d0ca37ab20b4f452b9643d86faa76f3c5ddafebafccbf33deb7bad7345919"
   },
   {
     "path": "core/gia.py",
-    "bytes": 13412,
-    "sha256": "04d74d6ea80f56d50f047c61396135c96ece0470da2a7249b822a33fcd6f6c35"
+    "bytes": 13486,
+    "sha256": "5785633e2fc94efa9c42905e604ec7dcdcded16c36c0906be0842af184c90577"
   },
   {
     "path": "core/math3d.py",
@@ -61,13 +66,13 @@
   },
   {
     "path": "core/naming.py",
-    "bytes": 1000,
-    "sha256": "eb0e05c648e8e283afcab1d186bda1881ea189f283a1b2b124b8e0303c0498cc"
+    "bytes": 1048,
+    "sha256": "7a623caabb449509fed1714057a04c9c83b0d0cb4ce60fb69a31deb921cd58e8"
   },
   {
     "path": "core/scene.py",
-    "bytes": 6252,
-    "sha256": "3b5402417c166f6a3f6504415f694a3c141388af2362d6c6accef0cd26178ef6"
+    "bytes": 6272,
+    "sha256": "f03ea701a021f618a12fdc24e0543213b81b46ced63af8f4ee5d40acf7b23ba5"
   },
   {
     "path": "core/static_gia.py",
@@ -76,18 +81,23 @@
   },
   {
     "path": "docs/CONTRIBUTING.md",
-    "bytes": 2768,
-    "sha256": "eb3f16e898593103cffb886796c9cf57760140cef3a795619c12e1cc9b3f8425"
+    "bytes": 3290,
+    "sha256": "7deb00f83c38aaa86ea8e59335abce14866cc6317c0150969b3260bf2c347d98"
   },
   {
     "path": "docs/images/banner.svg",
-    "bytes": 2002,
-    "sha256": "fe2ba3ebcfb7316ae9d5075c9c8ad3d5afaa886b8ac5ec6ad48a55193ed94427"
+    "bytes": 2045,
+    "sha256": "029c2b3214091ff01e23386d11185314d3388618844cfe3f5e93b30acb783ffb"
   },
   {
     "path": "docs/images/editor-example.png",
-    "bytes": 604756,
-    "sha256": "b26592312068746d45297bf9b892114fe461b8e724bd81390301ab8fce8b0c5f"
+    "bytes": 744798,
+    "sha256": "87c5c0cff3bc94ab67c6717fac2f2efd7f46fa0d505bc94021cfa87a212e758f"
+  },
+  {
+    "path": "docs/PROMOTION.md",
+    "bytes": 1198,
+    "sha256": "68cfa6aa5491e2dd2f4b87f588f1d2d2c78cb97472d3443564e1174cef5b751b"
   },
   {
     "path": "docs/RELEASE-v0.1.3.md",
@@ -100,14 +110,19 @@
     "sha256": "eb1fa5eaf26d30c0b1eb30bf572e1bff0ffae7991f934cf90f758e7f96e4a7f4"
   },
   {
+    "path": "docs/RELEASE-v0.2.0.md",
+    "bytes": 2878,
+    "sha256": "ea56d4e35d8f0f7cca77eac7a1ee49c7948110951d0c899c12cd26bc0e779621"
+  },
+  {
     "path": "docs/VALIDATION.md",
     "bytes": 10606,
     "sha256": "e109b9a04d5abc017cba8a472f66cb9663800dae45146f59350da3817ef06cba"
   },
   {
     "path": "examples/mcp-config.example.json",
-    "bytes": 137,
-    "sha256": "0789822ff60ff73a7dece51d052d43d9bdb9c449850aeb662b205b2d777d381d"
+    "bytes": 153,
+    "sha256": "672a35741334359ead5adf788647fcbee7974e5d3c1264d2f78ccff5afd01eda"
   },
   {
     "path": "examples/原生水体验证.starscene.json",
@@ -126,8 +141,8 @@
   },
   {
     "path": "launch.py",
-    "bytes": 2270,
-    "sha256": "d76688faa490d819dd2eaefafd2c7d39b0462cd65a1b3e2412db39ce9830a306"
+    "bytes": 2408,
+    "sha256": "bee97836d4f617f3b78f00b7cc25ab23551ed599304e7767360b6c4571a066b7"
   },
   {
     "path": "LICENSE",
@@ -141,23 +156,23 @@
   },
   {
     "path": "mcp_server.py",
-    "bytes": 6054,
-    "sha256": "c9493a741a940d5f530cff8dd3742024c35eb301fbe8a246bb504e0cfab9c0c5"
+    "bytes": 6167,
+    "sha256": "7b9c2901cee8d6f91cfaf594cb412c8b9e3d529844091b535ccab5b07cbc1158"
   },
   {
     "path": "package_source.py",
-    "bytes": 2738,
-    "sha256": "1626c6ebabe9d8c6ca082b4a329ed88acb8bb1127937f4a2bca5c0ac896853c1"
+    "bytes": 2754,
+    "sha256": "ee3d206d5b0e9a4c0b8efdc4f4b6ddd5d0fb9550e84087b930da79c194589512"
   },
   {
     "path": "README.md",
-    "bytes": 11593,
-    "sha256": "c688a5db01647cd74904c6e4be11481e3aafdd218ee89bb90a00172dee9f79bb"
+    "bytes": 12602,
+    "sha256": "1974e6888d54257010549bb50525eef525c74b2b8fe0299fd1ecfd262fbae61f"
   },
   {
     "path": "server.py",
-    "bytes": 8677,
-    "sha256": "e825a649eb3475982c057830203bc8591bb2442390bb95821541bf82f6032f8b"
+    "bytes": 8800,
+    "sha256": "6cf1730d830b9fe6f5fc0b0dd7c7c2e1dee0f1fb0222266d54d2136f1af70a7b"
   },
   {
     "path": "tests/blender_verify.py",
@@ -166,18 +181,18 @@
   },
   {
     "path": "tests/browser-smoke.cjs",
-    "bytes": 10425,
-    "sha256": "c389de24aa14df81a7f81386b6f6633769ca4c54da8f0ccb0162ac9df9db3d3c"
+    "bytes": 10450,
+    "sha256": "827d5df20901129f1f149bf5f572faf9f8cea0323e2b4b277ad06aa6e30f4db6"
   },
   {
     "path": "tests/package-preview.cjs",
-    "bytes": 1359,
-    "sha256": "a0a1040e30b4475984a4d1a82c6c8912722e46422d948021fe2eadd57dd95bb7"
+    "bytes": 1384,
+    "sha256": "0c8aef230fb05ecd123f494481dc485956bdcded360e9b3eeaa9e111a559c38d"
   },
   {
     "path": "tests/test_core.py",
-    "bytes": 14490,
-    "sha256": "97fdc0b57ba00a816762b5a575fc7f65d00b01b5e719291b60001728c66084d7"
+    "bytes": 15398,
+    "sha256": "88f4403dd997526eff56c049e6fcf2ef607979c7799b02e2320a821921262086"
   },
   {
     "path": "tests/test_native_policy.py",
@@ -191,8 +206,8 @@
   },
   {
     "path": "THIRD_PARTY.md",
-    "bytes": 3871,
-    "sha256": "17dc1d27c19033b1130efd05a629c2a7e121adff983f9cd1cd1a39f996143463"
+    "bytes": 3935,
+    "sha256": "963c2ab1801029ced7b58d5ef8e7681d1dddc83600b6570ca5056166f59ebf28"
   },
   {
     "path": "vendor/miliastra_tools/miliastra_core/__init__.py",
@@ -231,8 +246,8 @@
   },
   {
     "path": "web/app.js",
-    "bytes": 50320,
-    "sha256": "af21c60b1059b93176d10287409771c282d5a0c29b95f4b29a1c7cc3d53b9595"
+    "bytes": 50332,
+    "sha256": "2dc1e109364dec7e17c740e23ccbdd209bc4724eca71e187ff5a796fd25a8902"
   },
   {
     "path": "web/favicon.svg",
@@ -241,8 +256,8 @@
   },
   {
     "path": "web/index.html",
-    "bytes": 12697,
-    "sha256": "00f9ae64043a76e14f279e275c98f06b205b15327cdac820301923f2a7072789"
+    "bytes": 12825,
+    "sha256": "42ac983c827bd80fa9fdbb38f8dd7c8149f27e4ffe2e6336f44d00e486b99755"
   },
   {
     "path": "web/style.css",
@@ -301,7 +316,7 @@
   },
   {
     "path": "启动星构.cmd",
-    "bytes": 529,
-    "sha256": "82cc3a0985654b9cfc2efe5138ee1a3e6b347fa363e105533798be6910fd0497"
+    "bytes": 523,
+    "sha256": "d9312de46c313546d0fa01e6bb6fbeeee5a89e8f054b7b888ca554bb3d1cddce"
   }
 ]

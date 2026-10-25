@@ -1,4 +1,4 @@
-"""StarScene local service. Python 3.10+, standard library only."""
+"""XingGou local service. Python 3.10+, standard library only."""
 import argparse,json,mimetypes,os,re,sys,threading,time,traceback,urllib.parse
 from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
@@ -6,19 +6,19 @@ from core.catalog import Catalog
 from core.scene import ProjectStore
 from core.generator import Provider,generate_plan,generate_scene,generate_asset,offline_plan,offline_scene
 from core.gia import export_scene,ExportBlocked
+from core.branding import TOOL,DISPLAY_NAME,VERSION
 
 ROOT=Path(__file__).resolve().parent
-VERSION='0.1.4'
 class App:
     def __init__(self):
         self.catalog=Catalog();self.store=ProjectStore(ROOT/'projects',self.catalog);self.provider=Provider(ROOT/'projects');self.exports=ROOT/'exports'
         if not self.store.path.is_file():self.store.put(offline_scene(offline_plan('小型溪流营地，4栋木屋，森林、木桥和入口拱门'),self.catalog),source='sample')
     def boot(self):
         c=self.catalog
-        return dict(tool='StarSceneStudio',version=VERSION,catalog=c.all(),catalogStatus=dict(total=len(c.assets),ready=sum(a['exportable'] for a in c.assets),libraryAvailable=c.available,assetRoot=str(c.root)),provider=self.provider.status(),**self.store.get())
+        return dict(tool=TOOL,displayName=DISPLAY_NAME,version=VERSION,catalog=c.all(),catalogStatus=dict(total=len(c.assets),ready=sum(a['exportable'] for a in c.assets),libraryAvailable=c.available,assetRoot=str(c.root)),provider=self.provider.status(),**self.store.get())
 
 class Handler(BaseHTTPRequestHandler):
-    server_version='StarScene/0.1.3'
+    server_version=TOOL+'/'+VERSION
     def log_message(self,*args):pass
     def same_origin(self):
         host=self.headers.get('Host','');u=urllib.parse.urlsplit('http://'+host)
@@ -58,7 +58,7 @@ class Handler(BaseHTTPRequestHandler):
                 self.wfile.write(block);left-=len(block)
     def get(self):
         self.same_origin();u=urllib.parse.urlsplit(self.path);path=urllib.parse.unquote(u.path);qs=urllib.parse.parse_qs(u.query);app=self.server.app
-        if path=='/api/health':return self.json(dict(tool='StarSceneStudio',root=str(ROOT),version=VERSION))
+        if path=='/api/health':return self.json(dict(tool=TOOL,displayName=DISPLAY_NAME,root=str(ROOT),version=VERSION))
         if path=='/api/boot':return self.json(app.boot())
         if path=='/api/project':return self.json(app.store.get())
         if path=='/api/catalog':return self.json(dict(assets=app.catalog.search(qs.get('q',[''])[0],qs.get('category',[''])[0],qs.get('ready',[''])[0]=='true',qs.get('limit',[60])[0])))
@@ -78,7 +78,8 @@ class Handler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):self.guard(lambda:(_ for _ in ()).throw(PermissionError('不开放跨站接口')))
     def post(self):
         self.same_origin()
-        if self.headers.get('X-StarScene')!='1' or self.headers.get_content_type()!='application/json':raise PermissionError('请求须来自星构编辑器或其 MCP 客户端')
+        client=self.headers.get('X-XingGou',self.headers.get('X-StarScene'))
+        if client!='1' or self.headers.get_content_type()!='application/json':raise PermissionError('请求须来自星构工具箱编辑器或其 MCP 客户端')
         try:length=int(self.headers.get('Content-Length','0'))
         except ValueError:raise ValueError('请求长度错误')
         if not 0<length<=12_000_000:raise ValueError('请求内容应在 12 MB 以内')
@@ -110,7 +111,7 @@ def main():
     server=ThreadingHTTPServer(('127.0.0.1',args.port),Handler);server.daemon_threads=True;server.app=App()
     runtime=ROOT/'.runtime';runtime.mkdir(exist_ok=True)
     (runtime/'server.json').write_text(json.dumps(dict(url=f'http://127.0.0.1:{args.port}',pid=os.getpid(),root=str(ROOT))),encoding='utf-8')
-    print(f'StarScene Studio {VERSION} http://127.0.0.1:{args.port}',flush=True)
+    print(f'{TOOL} {DISPLAY_NAME} {VERSION} http://127.0.0.1:{args.port}',flush=True)
     try:server.serve_forever(poll_interval=.25)
     except KeyboardInterrupt:pass
     finally:server.server_close()

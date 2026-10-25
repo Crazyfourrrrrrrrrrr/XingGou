@@ -1,4 +1,4 @@
-# 参与 StarScene Studio
+# 参与 XingGou / 星构工具箱
 
 欢迎提交缺陷复现、兼容性改进、布局规则和导出验证。项目使用 Python 标准库与本地 Three.js 模块，日常运行不需要构建步骤。
 
@@ -11,13 +11,15 @@ python launch.py --no-browser
 python -m unittest discover -s tests -v
 ```
 
+没有真实资产库时，依赖资源的集成用例会明确跳过。配齐真实资产库的全量集成、浏览器回归、Blender 和游戏实机是不同的验证范围。
+
 浏览器测试还需要 Node.js、Playwright 和 Edge，使用独立源码副本及测试资产库运行：
 
 ```sh
 node tests/browser-smoke.cjs
 ```
 
-浏览器测试会编辑和保存当前测试工程，不应连接有未保存工作的个人服务。需要指定其他服务地址时，参见测试脚本的 `STARSCENE_URL` 环境变量。
+浏览器测试会编辑和保存当前测试工程，不应连接有未保存工作的个人服务。需要指定其他服务地址时，参见测试脚本的 `STARSCENE_URL` 环境变量；该旧名称继续兼容。
 
 GLB 独立验证可使用已安装的 Blender：
 
@@ -26,6 +28,10 @@ blender --background --factory-startup --python tests/blender_verify.py -- scene
 ```
 
 Blender 与浏览器测试依赖均属于开发验证工具，不是最终用户的运行依赖。
+
+## 品牌与兼容
+
+公共名称为 **XingGou / 星构工具箱**，仓库为 `Crazyfourrrrrrrrrrr/XingGou`。保留旧 `.starscene.json` 与 `starscene/1` 工程格式及 `STARSCENE_*` 环境变量兼容；新增配置使用 `XINGGOU_*`。历史发布说明和验证记录保留原版本名称。
 
 ## 设计约定
 
